@@ -7,7 +7,8 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'L3MON4D3/LuaSnip',
-    'onsails/lspkind.nvim'
+    'onsails/lspkind.nvim',
+    'petertriho/cmp-git',
   },
   event = { 'VeryLazy', 'InsertEnter', 'CmdlineEnter' },
   opts = function (_, opts)
@@ -76,6 +77,14 @@ return {
         { name = 'cmdline' }
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
+    })
+
+    cmp.setup.filetype('gitcommit', {
+      sources = cmp.config.sources({
+        { name = 'git' },
+      }, {
+          { name = 'buffer' },
+        })
     })
   end
 }
