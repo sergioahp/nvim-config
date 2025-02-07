@@ -1,9 +1,36 @@
 return {
   'nvim-cmp',
-  dependencies = {'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline', 'L3MON4D3/LuaSnip' },
+  dependencies = {
+    'neovim/nvim-lspconfig',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'L3MON4D3/LuaSnip',
+    'onsails/lspkind.nvim'
+  },
   event = { 'VeryLazy', 'InsertEnter', 'CmdlineEnter' },
   opts = function (_, opts)
     local cmp = require('cmp')
+    local lspkind = require('lspkind')
+    opts.formatting = {
+      format = lspkind.cmp_format({
+        mode = 'symbol',
+        menu = {
+          buffer = "󰈙",
+          nvim_lsp = "L",
+          luasnip = "",
+          nvim_lua = "",
+          latex_symbols = "𝓛",
+        },
+        maxwidth = {
+            menu = 50,
+            abbr = 50,
+        },
+        ellipsis_char = '…',
+        show_labelDetails = true,
+      })
+    }
     opts.mapping = {
       ['<C-space>'] = cmp.mapping.confirm({ select = true }),
       ['<C-n>'] = function ()
@@ -29,6 +56,11 @@ return {
       { name = 'buffer' },
     })
 
+    return opts
+  end,
+  config = function (_, opts)
+    local cmp = require('cmp')
+    cmp.setup(opts)
     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
@@ -45,6 +77,5 @@ return {
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
-    return opts
-  end,
+  end
 }
