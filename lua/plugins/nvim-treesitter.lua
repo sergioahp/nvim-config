@@ -8,6 +8,15 @@ local M = {
     sync_install = false,
     highlight = { enable = true, additional_vim_regex_highlighting = false },
     indent = { enable = true },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = "<leader>i",
+        node_incremental = "<leader>i",
+        scope_incremental = "<leader>ts",
+        node_decremental = "<leader>I",
+      },
+    },
   },
   config = function (_, opts)
     require("nvim-treesitter.configs").setup(opts)
