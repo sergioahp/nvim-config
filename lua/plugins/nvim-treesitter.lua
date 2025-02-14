@@ -86,7 +86,7 @@ local M = {
   },
   config = function (_, opts)
     require("nvim-treesitter.configs").setup(opts)
-    vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
   end
 }
 
