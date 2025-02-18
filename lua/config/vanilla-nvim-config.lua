@@ -3,6 +3,7 @@ local globalOptions = {
   scrolloff = 2,
   hlsearch = false,
   title = true,
+  timeoutlen = 8000,
 }
 
 local windowOptions = {
