@@ -25,7 +25,7 @@ return {
       format = lspkind.cmp_format({
         mode = 'symbol',
         menu = {
-          buffer = "󰈙",
+          buffer = "b",
           nvim_lsp = "L",
           luasnip = "",
           nvim_lua = "",
