@@ -10,6 +10,12 @@ return {
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind.nvim',
     'petertriho/cmp-git',
+    {
+      "MattiasMTS/cmp-dbee",
+      dependencies = "kndndrj/nvim-dbee",
+      ft = "sql",
+      opts = {},
+    },
   },
   event = { 'VeryLazy', 'InsertEnter', 'CmdlineEnter' },
   opts = function (_, opts)
@@ -24,6 +30,7 @@ return {
           luasnip = "",
           nvim_lua = "",
           latex_symbols = "𝓛",
+          ["cmp-dbee"] = "",
         },
         maxwidth = {
             menu = 50,
@@ -94,6 +101,7 @@ return {
 
     cmp.setup.filetype('sql', {
       sources = cmp.config.sources({
+        { name = "cmp-dbee" },
         { name = "buffer" },
         })
     })
