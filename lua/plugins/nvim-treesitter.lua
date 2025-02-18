@@ -85,7 +85,11 @@ local M = {
     require("nvim-treesitter.install").update({ with_sync = true })()
   end,
   opts = {
-    ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'javascript', 'html' , 'typst', 'bash', 'luadoc', 'markdown', 'requirements', 'toml', 'yaml', 'python', 'nix', 'yuck', 'sql' },
+    ensure_installed = {
+      "c", "lua", "vim", "vimdoc", "query", "javascript", "html",
+      "typst", "bash", "luadoc", "markdown", "requirements", "toml",
+      "yaml", "python", "nix", "yuck", "rust", "sql",
+    },
     sync_install = false,
     highlight = { enable = true, additional_vim_regex_highlighting = false },
     indent = { enable = true },
