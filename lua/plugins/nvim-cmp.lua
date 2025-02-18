@@ -7,6 +7,7 @@ return {
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind.nvim',
     'petertriho/cmp-git',
   },
@@ -56,8 +57,12 @@ return {
     }, {
       { name = 'buffer' },
     })
-
-    return opts
+    -- -- As far as I know, this does not make a difference
+    -- opts.snippet = {
+    --   expand = function(args)
+    --     require'luasnip'.lsp_expand(args.body)
+    --   end
+    -- }
   end,
   config = function (_, opts)
     local cmp = require('cmp')
