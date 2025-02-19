@@ -6,6 +6,7 @@ return {
   -- install jsregexp (optional!).
   build = "make install_jsregexp",
   dependencies = { 'rafamadriz/friendly-snippets' },
+  event = 'BufEnter',
   keys = {
     {
       '<c-j>', function ()

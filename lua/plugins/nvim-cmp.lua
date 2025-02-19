@@ -17,7 +17,10 @@ return {
       opts = {},
     },
   },
-  event = { 'VeryLazy', 'InsertEnter', 'CmdlineEnter' },
+  event = {
+    'InsertEnter',
+    'CmdlineEnter',
+  },
   opts = function (_, opts)
     local cmp = require('cmp')
     local lspkind = require('lspkind')

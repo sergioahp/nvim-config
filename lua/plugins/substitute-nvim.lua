@@ -6,7 +6,6 @@ return {
       preserve_cursor_position = true,
     },
   },
-  event = "BufEnter",
   keys = {
     {
       "cx",
