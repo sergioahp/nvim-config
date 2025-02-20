@@ -29,6 +29,51 @@ return {
       "n",
       desc = "telescope find files"
     },
+    {
+      "<leader>fk",
+      function ()
+        -- require('telescope').load_extension('fzf')
+        require('telescope.builtin').keymaps()
+      end,
+      "n",
+      desc = "telescope keymaps"
+    },
+    {
+      "<leader>fg",
+      function ()
+        -- require('telescope').load_extension('fzf')
+        require('telescope.builtin').git_files()
+      end,
+      "n",
+      desc = "telescope git files"
+    },
+    {
+      "<leader>fi",
+      function ()
+        -- require('telescope').load_extension('fzf')
+        require('telescope.builtin').git_commits()
+      end,
+      "n",
+      desc = "telescope git commits"
+    },
+    {
+      "<leader>fm",
+      function ()
+        -- require('telescope').load_extension('fzf')
+        require('telescope.builtin').git_bcommits()
+      end,
+      "n",
+      desc = "telescope git bcommits"
+    },
+    {
+      "<leader>fb",
+      function ()
+        -- require('telescope').load_extension('fzf')
+        require('telescope.builtin').git_branches()
+      end,
+      "n",
+      desc = "telescope git brances"
+    },
     -- {
     --   "<leader>fe",
     --   function ()
