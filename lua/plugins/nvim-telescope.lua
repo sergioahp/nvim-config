@@ -6,6 +6,12 @@ return {
     'nvim-telescope/telescope-ui-select.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build ='make' },
   },
+  init = function ()
+    vim.ui.select = function(items, opts, on_choice)
+      require('telescope')
+      vim.ui.select(items, opts, on_choice)
+    end
+  end,
   config = function ()
     require('telescope').setup {
       extensions = {
