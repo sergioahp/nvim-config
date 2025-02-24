@@ -13,16 +13,8 @@ return {
       vim.ui.select(items, opts, on_choice)
     end
   end,
-  config = function ()
-    require('telescope').setup {
-      extensions = {
-        fzf = {},
-        ['ui-select'] = {
-          require('telescope.themes').get_dropdown {
-          }
-        },
-      },
-    }
+  config = function (opts)
+    require('telescope').setup(opts)
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('ui-select')
   end,
@@ -157,9 +149,15 @@ return {
       desc = "telescope multigrep",
     },
   },
-  -- opts = {
-  --   extensions = {
-  --     fzf = {}
-  --   }
-  -- },
+  opts = function()
+    return {
+      extensions = {
+        fzf = {},
+        ['ui-select'] = {
+          require('telescope.themes').get_dropdown {
+          }
+        },
+      },
+    }
+  end
 }
