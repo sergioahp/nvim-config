@@ -67,12 +67,11 @@ return {
     }, {
       { name = 'buffer' },
     })
-    -- -- As far as I know, this does not make a difference
-    -- opts.snippet = {
-    --   expand = function(args)
-    --     require'luasnip'.lsp_expand(args.body)
-    --   end
-    -- }
+    opts.snippet = {
+      expand = function(args)
+        require'luasnip'.lsp_expand(args.body)
+      end
+    }
   end,
   config = function (_, opts)
     local cmp = require('cmp')
