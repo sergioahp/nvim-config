@@ -1,5 +1,3 @@
--- Define our textobject definitions.
--- Paired ones have both an inner and an outer capture.
 local textobj_pairs = {
   t = { inner = "@attribute.inner",   outer = "@attribute.outer"   },
   b = { inner = "@block.inner",       outer = "@block.outer"       },
@@ -16,10 +14,10 @@ local textobj_pairs = {
 -- Non-paired textobjects.
 -- Here the original select mappings used more than one character.
 local nonpaired = {
-  ee = "@assignment.inner",
-  el = "@assignment.lhs",
-  eh = "@assignment.rhs",
-  u  = "@nubmer.inner",  -- note: "nubmer" appears as in your config.
+  h = "@assignment.inner",
+  e = "@assignment.lhs",
+  r = "@assignment.rhs",
+  u = "@number.inner",
 }
 
 -- Build the select keymaps table dynamically.
@@ -32,7 +30,6 @@ for letter, obj in pairs(textobj_pairs) do
 end
 for key, capture in pairs(nonpaired) do
   select_keymaps["i" .. key] = capture
-  select_keymaps["I" .. string.upper(key)] = capture
 end
 
 -- Build swap mapping tables.
@@ -75,7 +72,6 @@ for key, capture in pairs(nonpaired) do
   goto_prev_end["<leader>p" .. string.upper(key)] = capture
 end
 
--- Now plug everything into the Treesitter configuration.
 local M = {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
