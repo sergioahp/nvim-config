@@ -121,7 +121,7 @@ local M = {
       },
     },
   },
-  config = function(_, opts)
+  config = function (_, opts)
     require("nvim-treesitter.configs").setup(opts)
     vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
     local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
