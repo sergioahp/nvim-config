@@ -8,12 +8,12 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build ='make' },
   },
   init = function ()
-    vim.ui.select = function(items, opts, on_choice)
+    vim.ui.select = function (items, opts, on_choice)
       require('telescope')
       vim.ui.select(items, opts, on_choice)
     end
   end,
-  config = function (opts)
+  config = function (_, opts)
     require('telescope').setup(opts)
     require('telescope').load_extension('fzf')
     require('telescope').load_extension('ui-select')
@@ -84,7 +84,7 @@ return {
     -- },
     {
       "<leader>b",
-      function()
+      function ()
         -- require('telescope').load_extension('fzf')
         require('telescope.builtin').buffers()
       end,
@@ -124,7 +124,7 @@ return {
     },
     {
       "<leader>fs",
-      function()
+      function ()
         require("telescope.command").load_command()
       end,
       "n",
@@ -149,7 +149,7 @@ return {
       desc = "telescope multigrep",
     },
   },
-  opts = function()
+  opts = function ()
     return {
       extensions = {
         fzf = {},

@@ -74,7 +74,7 @@ return {
       }
 
     end,
-    config = function(_, opts)
+    config = function (_, opts)
       -- local servers = { 'lua_ls', 'pylsp', 'nil_ls', 'rust_analyzer', }
       local lspconfig = require('lspconfig')
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()

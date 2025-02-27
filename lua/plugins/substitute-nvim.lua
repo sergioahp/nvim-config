@@ -9,7 +9,7 @@ return {
   keys = {
     {
       "cx",
-      function()
+      function ()
         require("substitute.exchange").operator()
       end,
       mode = "n",
@@ -19,7 +19,7 @@ return {
     },
     {
       "cxx",
-      function()
+      function ()
         require("substitute.exchange").line()
       end,
       mode = "n",
@@ -29,7 +29,7 @@ return {
     },
     {
       "X",
-      function()
+      function ()
         require("substitute.exchange").visual()
       end,
       mode = "x",
@@ -39,7 +39,7 @@ return {
     },
     {
       "cxc",
-      function()
+      function ()
         require("substitute.exchange").cancel()
       end,
       mode = "n",
@@ -49,7 +49,7 @@ return {
     },
     -- {
     --   "cxm",
-    --   function()
+    --   function ()
     --     require("substitute.exchange").operator({ motion = "iw" })
     --   end,
     --   mode = "n",

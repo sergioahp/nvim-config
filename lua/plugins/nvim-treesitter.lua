@@ -77,7 +77,7 @@ local M = {
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
   },
-  build = function()
+  build = function ()
     require("nvim-treesitter.install").update({ with_sync = true })()
   end,
   opts = {
