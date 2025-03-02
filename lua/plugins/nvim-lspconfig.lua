@@ -30,6 +30,86 @@ return {
           vim.lsp.buf.code_action,
           { desc = "lsp go to code actions" },
         },
+        {
+          '',
+          '[d',
+          function ()
+            vim.diagnostic.goto_prev()
+          end,
+          { desc = "previous diagnostic" },
+        },
+        {
+          '',
+          ']d',
+          function ()
+            vim.diagnostic.goto_next()
+          end,
+          { desc = "next diagnostic" },
+        },
+        {
+          '',
+          '[g',
+          function ()
+            vim.diagnostic.goto_prev({ severity = "HINT" })
+          end,
+          { desc = "previous hint" },
+        },
+        {
+          '',
+          ']g',
+          function ()
+            vim.diagnostic.goto_next({ severity = "HINT" })
+          end,
+          { desc = "next hint" },
+        },
+        {
+          '',
+          '[s',
+          function ()
+            vim.diagnostic.goto_prev({ severity = "INFO" })
+          end,
+          { desc = "previous info" },
+        },
+        {
+          '',
+          ']s',
+          function ()
+            vim.diagnostic.goto_next({ severity = "INFO" })
+          end,
+          { desc = "next info" },
+        },
+        {
+          '',
+          '[w',
+          function ()
+            vim.diagnostic.goto_prev({ severity = "WARN" })
+          end,
+          { desc = "previous warning" },
+        },
+        {
+          '',
+          ']w',
+          function ()
+            vim.diagnostic.goto_next({ severity = "WARN" })
+          end,
+          { desc = "next warning" },
+        },
+        {
+          '',
+          '[r',
+          function ()
+            vim.diagnostic.goto_prev({ severity = "ERROR" })
+          end,
+          { desc = "previous error" },
+        },
+        {
+          '',
+          ']r',
+          function ()
+            vim.diagnostic.goto_next({ severity = "ERROR" })
+          end,
+          { desc = "next error" },
+        },
       }
       local global_options = {
         capabilities = require('cmp_nvim_lsp').default_capabilities(),
