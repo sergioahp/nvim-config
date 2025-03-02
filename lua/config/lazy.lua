@@ -20,3 +20,5 @@ require("lazy").setup({
   },
   checker = { enabled = true, notify = false },
 })
+
+vim.keymap.set("", "<leader>L", function () require("lazy").home() end, {})
