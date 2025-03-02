@@ -1,3 +1,8 @@
 vim.loader.enable()
-require("config.vanilla-nvim-config")
+
+-- Define global variables that the next requires make use of
+vim.g.mapleader = " "
+vim.g.maplocalleader = " j"
+
 require("config.lazy")
+require("config.vanilla-nvim-config")
