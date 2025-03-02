@@ -7,6 +7,7 @@ local globalOptions = {
 }
 
 local windowOptions = {
+  signcolumn = "number",
   number = true,
   relativenumber = true,
   list = true,
@@ -45,3 +46,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 for c, name in pairs { m="manual", i="indent", e="expr", d="diff", r="marker" } do
   vim.keymap.set({"n", "v"}, "<leader>o" .. c, function () vim.api.nvim_set_option_value("foldmethod", name, { win=0 }) end)
 end
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '●',
+      [vim.diagnostic.severity.WARN ] = '●',
+      [vim.diagnostic.severity.HINT ] = '●',
+      [vim.diagnostic.severity.INFO ] = '●',
+    },
+  },
+})
+
