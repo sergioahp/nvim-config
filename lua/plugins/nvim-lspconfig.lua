@@ -6,6 +6,9 @@ return {
         'hrsh7th/cmp-nvim-lsp'
       },
       {
+        'ltex_extra.nvim',
+      },
+      {
         'folke/lazydev.nvim',
         ft = 'lua',
         opts = {
@@ -129,6 +132,11 @@ return {
         end,
       }
       local per_server = {
+        ltex_plus = {
+          on_attach = function(client, bufnr)
+            require("ltex_extra").setup {}
+          end,
+        },
         lua_ls = {},
         pylsp = {},
         nil_ls = {},
