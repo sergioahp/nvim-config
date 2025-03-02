@@ -43,8 +43,50 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+local maps = {
+  {
+    "v",
+    "gs",
+    ":s/\\%V/g<left><left>",
+  },
+  {
+    "n",
+    "gs",
+    ":s//g<left><left>",
+  },
+  {
+    "",
+    "gz",
+    'gi<c-r>"',
+  },
+  {
+    "",
+    "g<leader>",
+    "`",
+  },
+  -- TODO: Enalbe alacritty's expended keys
+  {
+    "",
+    "<C-BS>",
+    "<C-w>",
+  },
+}
+
+
 for c, name in pairs { m="manual", i="indent", e="expr", d="diff", r="marker" } do
   vim.keymap.set({"n", "v"}, "<leader>o" .. c, function () vim.api.nvim_set_option_value("foldmethod", name, { win=0 }) end)
+end
+for _, v in ipairs(maps) do
+  local mode = v[1]
+  local lhs = v[2]
+  local rhs = v[3]
+  local _opts = v[4]
+  _opts = vim.tbl_deep_extend(
+    'keep',
+    _opts or {},
+    { noremap = true }
+  )
+  vim.keymap.set(mode, lhs, rhs, _opts)
 end
 
 vim.diagnostic.config({
