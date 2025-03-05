@@ -6,7 +6,8 @@ return {
         'hrsh7th/cmp-nvim-lsp'
       },
       {
-        'ltex_extra.nvim',
+        'barreiroleo/ltex_extra.nvim',
+        -- comentario
       },
       {
         'folke/lazydev.nvim',
