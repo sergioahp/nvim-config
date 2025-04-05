@@ -24,7 +24,7 @@ return {
       function ()
         require('telescope.builtin').find_files()
       end,
-      "n",
+      "",
       desc = "telescope find files"
     },
     {
@@ -32,7 +32,7 @@ return {
       function ()
         require('telescope.builtin').current_buffer_fuzzy_find()
       end,
-      "n",
+      "",
       desc = "telescope grep inside current file"
     },
     {
@@ -40,7 +40,7 @@ return {
       function ()
         require('telescope.builtin').builtin()
       end,
-      "n",
+      "",
       desc = "telescope grep inside current dir"
     },
     {
@@ -48,7 +48,7 @@ return {
       function ()
         require('telescope.builtin').grep_string()
       end,
-      "n",
+      "",
       desc = "telescope grep inside current dir"
     },
     {
@@ -56,7 +56,7 @@ return {
       function ()
         require('telescope.builtin').treesitter()
       end,
-      "n",
+      "",
       desc = "telescope treesitter"
     },
     {
@@ -64,7 +64,7 @@ return {
       function ()
         require('telescope.builtin').reloader()
       end,
-      "n",
+      "",
       desc = "telescope treesitter"
     },
     {
@@ -72,7 +72,7 @@ return {
       function ()
         require('telescope.builtin').keymaps()
       end,
-      "n",
+      "",
       desc = "telescope keymaps"
     },
     {
@@ -80,7 +80,7 @@ return {
       function ()
         require('telescope.builtin').git_files()
       end,
-      "n",
+      "",
       desc = "telescope git files"
     },
     {
@@ -88,7 +88,7 @@ return {
       function ()
         require('telescope.builtin').git_commits()
       end,
-      "n",
+      "",
       desc = "telescope git commits"
     },
     {
@@ -96,7 +96,7 @@ return {
       function ()
         require('telescope.builtin').git_bcommits()
       end,
-      "n",
+      "",
       desc = "telescope git buffer commits"
     },
     {
@@ -104,7 +104,7 @@ return {
       function ()
         require('telescope.builtin').git_branches()
       end,
-      "n",
+      "",
       desc = "telescope git branches"
     },
     {
@@ -112,7 +112,7 @@ return {
       function ()
         require('telescope.builtin').live_grep({ grep_open_files = true })
       end,
-      "n",
+      "",
       desc = "telescope grep in git tracked files"
     },
     {
@@ -120,7 +120,7 @@ return {
       function ()
         require('telescope.builtin').live_grep()
       end,
-      "n",
+      "",
       desc = "telescope grep"
     },
     {
@@ -128,7 +128,7 @@ return {
       function ()
         require('telescope.builtin').buffers()
       end,
-      "n",
+      "",
       desc = "telescope buffers",
     },
     {
@@ -136,7 +136,7 @@ return {
       function ()
         require('telescope.builtin').help_tags()
       end,
-      "n",
+      "",
       desc = "telescope help",
     },
     {
@@ -146,7 +146,7 @@ return {
           cwd = vim.fn.stdpath('config')
         }
       end,
-      "n",
+      "",
       desc = "telescope config files",
     },
     {
@@ -156,7 +156,7 @@ return {
           cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy')
         }
       end,
-      "n",
+      "",
       desc = "telescope plugin files",
     },
     {
@@ -164,7 +164,7 @@ return {
       function ()
         require("telescope.command").quickfix()
       end,
-      "n",
+      "",
       desc = "telescope quickfix",
     },
     {
@@ -172,7 +172,7 @@ return {
       function ()
         require("telescope.command").load_command()
       end,
-      "n",
+      "",
       desc = "telescope commands",
     },
     {
@@ -180,7 +180,7 @@ return {
       function ()
         require('config.multigrep').live_multigrep()
       end,
-      "n",
+      "",
       desc = "telescope multigrep",
     },
     {
@@ -188,7 +188,7 @@ return {
       function ()
         require('telescope.builtin').resume()
       end,
-      "n",
+      "",
       desc = "telescope multigrep",
     },
   },
