@@ -35,6 +35,10 @@ for name, val in pairs(bufferOptions) do
   vim.api.nvim_set_option_value(name, val, { buf=0 })
 end
 
+-- for name, val in pairs(globalVariables) do
+--     vim.api.nvim_set_var(name, val)
+-- end
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight on yanking',
   group = vim.api.nvim_create_augroup('custom-highlight-yank', { clear = true }),
