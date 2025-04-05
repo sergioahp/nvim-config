@@ -23,13 +23,13 @@ return {
 
       local global_keys = {
         {
-          'n',
+          '',
           '<leader>lr',
           vim.lsp.buf.rename,
           { desc = "lsp go to declaration" },
         },
         {
-          'n',
+          '',
           '<leader>la',
           vim.lsp.buf.code_action,
           { desc = "lsp go to code actions" },
