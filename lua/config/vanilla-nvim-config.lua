@@ -74,7 +74,7 @@ local maps = {
 
 
 for c, name in pairs { m="manual", i="indent", e="expr", d="diff", r="marker" } do
-  vim.keymap.set({"n", "v"}, "<leader>o" .. c, function () vim.api.nvim_set_option_value("foldmethod", name, { win=0 }) end)
+  vim.keymap.set("", "<leader>o" .. c, function () vim.api.nvim_set_option_value("foldmethod", name, { win=0 }) end)
 end
 for _, v in ipairs(maps) do
   local mode = v[1]
