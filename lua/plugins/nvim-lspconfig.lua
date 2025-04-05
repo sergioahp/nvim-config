@@ -134,6 +134,7 @@ return {
       }
       local per_server = {
         ltex_plus = {
+          autostart = false,
           on_attach = function(client, bufnr)
             require("ltex_extra").setup {}
           end,
