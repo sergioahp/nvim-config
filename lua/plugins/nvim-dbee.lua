@@ -1,7 +1,7 @@
 return {
   enabled = true,
   "kndndrj/nvim-dbee",
-  -- cmd = "Dbee",
+  cmd = "Dbee",
   dependencies = {
     "MunifTanjim/nui.nvim",
     -- "MattiasMTS/cmp-dbee",
