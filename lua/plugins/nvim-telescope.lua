@@ -76,7 +76,7 @@ return {
       desc = "telescope keymaps"
     },
     {
-      "<leader>fg",
+      "<leader>g",
       function ()
         require('telescope.builtin').git_files()
       end,
@@ -84,7 +84,7 @@ return {
       desc = "telescope git files"
     },
     {
-      "<leader>fC",
+      "<leader>gc",
       function ()
         require('telescope.builtin').git_commits()
       end,
@@ -92,20 +92,28 @@ return {
       desc = "telescope git commits"
     },
     {
-      "<leader>fM",
+      "<leader>gb",
       function ()
         require('telescope.builtin').git_bcommits()
       end,
       "n",
-      desc = "telescope git bcommits"
+      desc = "telescope git buffer commits"
     },
     {
-      "<leader>fB",
+      "<leader>gr",
       function ()
         require('telescope.builtin').git_branches()
       end,
       "n",
       desc = "telescope git branches"
+    },
+    {
+      "<leader>gl",
+      function ()
+        require('telescope.builtin').live_grep({ grep_open_files = true })
+      end,
+      "n",
+      desc = "telescope grep in git tracked files"
     },
     {
       "<leader>fE",
