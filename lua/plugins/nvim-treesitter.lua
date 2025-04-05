@@ -103,7 +103,6 @@ local M = {
         enable = true,
         lookahead = true,
         lookbehind = true,
-        include_surrounding_whitespace = false,
         keymaps = select_keymaps,  -- our dynamically built select mappings
       },
       swap = {
