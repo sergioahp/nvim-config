@@ -20,7 +20,8 @@ return {
           h:enable(bufnr)
           vim.api.nvim_echo({{ "ccc h on" }}, false, {})
         end
-      end
+      end,
+      ""
     }
   },
   init = function ()

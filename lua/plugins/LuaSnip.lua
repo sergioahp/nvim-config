@@ -44,6 +44,7 @@ return {
       '<leader>ne', function ()
         require('luasnip.loaders').edit_snippet_files()
       end,
+      '',
       desc = 'luasnip edit',
     },
   },
