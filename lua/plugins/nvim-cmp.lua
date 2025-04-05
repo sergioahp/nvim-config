@@ -11,6 +11,8 @@ return {
     'onsails/lspkind.nvim',
     'petertriho/cmp-git',
     {
+      -- Issue: cmp-dbee require()s dbee even on files it's it shouldn't provide
+      -- completions on
       "MattiasMTS/cmp-dbee",
       dependencies = "kndndrj/nvim-dbee",
       ft = "sql",
@@ -60,10 +62,7 @@ return {
     }
     opts.sources = cmp.config.sources({
       { name = 'nvim_lsp' },
-      -- { name = 'vsnip' }, -- For vsnip users.
-      { name = 'luasnip' }, -- For luasnip users.
-      -- { name = 'ultisnips' }, -- For ultisnips users.
-      -- { name = 'snippy' }, -- For snippy users.
+      { name = 'luasnip' },
     }, {
       { name = 'buffer' },
     })
@@ -86,7 +85,7 @@ return {
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
-        { name = 'path' }
+        { name = 'path' },
       }, {
         { name = 'cmdline' }
       }),
