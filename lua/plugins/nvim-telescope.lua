@@ -20,176 +20,176 @@ return {
   end,
   keys = {
     {
-      "<leader>ff",
+      '<leader>ff',
       function ()
         require('telescope.builtin').find_files()
       end,
-      "",
-      desc = "telescope find files"
+      '',
+      desc = 'telescope find files'
     },
     {
-      "<leader>fi",
+      '<leader>fi',
       function ()
         require('telescope.builtin').current_buffer_fuzzy_find()
       end,
-      "",
-      desc = "telescope grep inside current file"
+      '',
+      desc = 'telescope grep inside current file'
     },
     {
-      "<leader>fb",
+      '<leader>fb',
       function ()
         require('telescope.builtin').builtin()
       end,
-      "",
-      desc = "telescope grep inside current dir"
+      '',
+      desc = 'telescope grep inside current dir'
     },
     {
-      "<leader>fd",
+      '<leader>fd',
       function ()
         require('telescope.builtin').grep_string()
       end,
-      "",
-      desc = "telescope grep inside current dir"
+      '',
+      desc = 'telescope grep inside current dir'
     },
     {
-      "<leader>ft",
+      '<leader>ft',
       function ()
         require('telescope.builtin').treesitter()
       end,
-      "",
-      desc = "telescope treesitter"
+      '',
+      desc = 'telescope treesitter'
     },
     {
-      "<leader>fR",
+      '<leader>fR',
       function ()
         require('telescope.builtin').reloader()
       end,
-      "",
-      desc = "telescope treesitter"
+      '',
+      desc = 'telescope treesitter'
     },
     {
-      "<leader>fk",
+      '<leader>fk',
       function ()
         require('telescope.builtin').keymaps()
       end,
-      "",
-      desc = "telescope keymaps"
+      '',
+      desc = 'telescope keymaps'
     },
     {
-      "<leader>g",
+      '<leader>g',
       function ()
         require('telescope.builtin').git_files()
       end,
-      "",
-      desc = "telescope git files"
+      '',
+      desc = 'telescope git files'
     },
     {
-      "<leader>gc",
+      '<leader>gc',
       function ()
         require('telescope.builtin').git_commits()
       end,
-      "",
-      desc = "telescope git commits"
+      '',
+      desc = 'telescope git commits'
     },
     {
-      "<leader>gb",
+      '<leader>gb',
       function ()
         require('telescope.builtin').git_bcommits()
       end,
-      "",
-      desc = "telescope git buffer commits"
+      '',
+      desc = 'telescope git buffer commits'
     },
     {
-      "<leader>gr",
+      '<leader>gr',
       function ()
         require('telescope.builtin').git_branches()
       end,
-      "",
-      desc = "telescope git branches"
+      '',
+      desc = 'telescope git branches'
     },
     {
-      "<leader>gl",
+      '<leader>gl',
       function ()
         require('telescope.builtin').live_grep({ grep_open_files = true })
       end,
-      "",
-      desc = "telescope grep in git tracked files"
+      '',
+      desc = 'telescope grep in git tracked files'
     },
     {
-      "<leader>fE",
+      '<leader>fE',
       function ()
         require('telescope.builtin').live_grep()
       end,
-      "",
-      desc = "telescope grep"
+      '',
+      desc = 'telescope grep'
     },
     {
-      "<leader>b",
+      '<leader>b',
       function ()
         require('telescope.builtin').buffers()
       end,
-      "",
-      desc = "telescope buffers",
+      '',
+      desc = 'telescope buffers',
     },
     {
-      "<leader>fh",
+      '<leader>fh',
       function ()
         require('telescope.builtin').help_tags()
       end,
-      "",
-      desc = "telescope help",
+      '',
+      desc = 'telescope help',
     },
     {
-      "<leader>fc",
+      '<leader>fc',
       function ()
         require('telescope.builtin').find_files {
           cwd = vim.fn.stdpath('config')
         }
       end,
-      "",
-      desc = "telescope config files",
+      '',
+      desc = 'telescope config files',
     },
     {
-      "<leader>fo",
+      '<leader>fo',
       function ()
         require('telescope.builtin').find_files {
           cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy')
         }
       end,
-      "",
-      desc = "telescope plugin files",
+      '',
+      desc = 'telescope plugin files',
     },
     {
-      "<leader>fq",
+      '<leader>fq',
       function ()
-        require("telescope.command").quickfix()
+        require('telescope.command').quickfix()
       end,
-      "",
-      desc = "telescope quickfix",
+      '',
+      desc = 'telescope quickfix',
     },
     {
-      "<leader>fs",
+      '<leader>fs',
       function ()
-        require("telescope.command").load_command()
+        require('telescope.command').load_command()
       end,
-      "",
-      desc = "telescope commands",
+      '',
+      desc = 'telescope commands',
     },
     {
-      "<leader>fe",
+      '<leader>fe',
       function ()
         require('config.multigrep').live_multigrep()
       end,
-      "",
-      desc = "telescope multigrep",
+      '',
+      desc = 'telescope multigrep',
     },
     {
-      "<leader>fr",
+      '<leader>fr',
       function ()
         require('telescope.builtin').resume()
       end,
-      "",
-      desc = "telescope multigrep",
+      '',
+      desc = 'telescope resume last search',
     },
   },
   opts = function ()
