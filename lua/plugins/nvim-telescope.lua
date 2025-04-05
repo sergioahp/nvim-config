@@ -22,16 +22,54 @@ return {
     {
       "<leader>ff",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').find_files()
       end,
       "n",
       desc = "telescope find files"
     },
     {
+      "<leader>fi",
+      function ()
+        require('telescope.builtin').current_buffer_fuzzy_find()
+      end,
+      "n",
+      desc = "telescope grep inside current file"
+    },
+    {
+      "<leader>fb",
+      function ()
+        require('telescope.builtin').builtin()
+      end,
+      "n",
+      desc = "telescope grep inside current dir"
+    },
+    {
+      "<leader>fd",
+      function ()
+        require('telescope.builtin').grep_string()
+      end,
+      "n",
+      desc = "telescope grep inside current dir"
+    },
+    {
+      "<leader>ft",
+      function ()
+        require('telescope.builtin').treesitter()
+      end,
+      "n",
+      desc = "telescope treesitter"
+    },
+    {
+      "<leader>fR",
+      function ()
+        require('telescope.builtin').reloader()
+      end,
+      "n",
+      desc = "telescope treesitter"
+    },
+    {
       "<leader>fk",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').keymaps()
       end,
       "n",
@@ -40,52 +78,46 @@ return {
     {
       "<leader>fg",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').git_files()
       end,
       "n",
       desc = "telescope git files"
     },
     {
-      "<leader>fi",
+      "<leader>fC",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').git_commits()
       end,
       "n",
       desc = "telescope git commits"
     },
     {
-      "<leader>fm",
+      "<leader>fM",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').git_bcommits()
       end,
       "n",
       desc = "telescope git bcommits"
     },
     {
-      "<leader>fb",
+      "<leader>fB",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').git_branches()
       end,
       "n",
-      desc = "telescope git brances"
+      desc = "telescope git branches"
     },
-    -- {
-    --   "<leader>fe",
-    --   function ()
-    --     require('telescope').load_extension('fzf')
-    --     require('telescope.builtin').live_grep()
-    --   end,
-    --   "n",
-    --   desc = "telescope grep"
-    -- },
+    {
+      "<leader>fE",
+      function ()
+        require('telescope.builtin').live_grep()
+      end,
+      "n",
+      desc = "telescope grep"
+    },
     {
       "<leader>b",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').buffers()
       end,
       "n",
@@ -94,7 +126,6 @@ return {
     {
       "<leader>fh",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').help_tags()
       end,
       "n",
@@ -103,7 +134,6 @@ return {
     {
       "<leader>fc",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').find_files {
           cwd = vim.fn.stdpath('config')
         }
@@ -114,13 +144,20 @@ return {
     {
       "<leader>fo",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').find_files {
           cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy')
         }
       end,
       "n",
       desc = "telescope plugin files",
+    },
+    {
+      "<leader>fq",
+      function ()
+        require("telescope.command").quickfix()
+      end,
+      "n",
+      desc = "telescope quickfix",
     },
     {
       "<leader>fs",
@@ -133,7 +170,6 @@ return {
     {
       "<leader>fe",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('config.multigrep').live_multigrep()
       end,
       "n",
@@ -142,7 +178,6 @@ return {
     {
       "<leader>fr",
       function ()
-        -- require('telescope').load_extension('fzf')
         require('telescope.builtin').resume()
       end,
       "n",
