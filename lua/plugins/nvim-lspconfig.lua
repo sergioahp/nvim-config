@@ -182,22 +182,6 @@ return {
           tbl
         )
       end
-      -- lspconfig.tinymist.setup {
-      --   capabilities = capabilities,
-      --   settings = {
-      --     exportPdf = "onSave",
-      --   },
-      -- }
-      -- lspconfig.rust_analyzer.setup {
-      --   capabilities = capabilities,
-      --   settings = {
-      --     ['rust-analyzer'] = {
-      --       diagnostics = {
-      --         enable = false
-      --       }
-      --     }
-      --   }
-      -- }
     end,
   },
 }
