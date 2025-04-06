@@ -37,10 +37,10 @@ local swap_next     = {}
 local swap_previous = {}
 for letter, obj in pairs(textobj_pairs) do
   -- For paired textobjects, add both inner and outer swaps.
-  swap_next["<leader>s" .. letter]     = obj.inner
-  swap_previous["<leader>S" .. letter] = obj.inner
-  swap_next["<leader>a" .. letter]     = obj.outer
-  swap_previous["<leader>A" .. letter] = obj.outer
+  swap_next["<leader>d" .. letter]     = obj.inner
+  swap_previous["<leader>D" .. letter] = obj.inner
+  swap_next["<leader>s" .. letter]     = obj.outer
+  swap_previous["<leader>S" .. letter] = obj.outer
 end
 for key, capture in pairs(nonpaired) do
   swap_next["<leader>s" .. key]     = capture
