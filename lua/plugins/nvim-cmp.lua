@@ -65,6 +65,7 @@ return {
       end,
     }
     opts.sources = cmp.config.sources({
+      { name = 'git' },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
     }, {
@@ -96,6 +97,9 @@ return {
       matching = { disallow_symbol_nonprefix_matching = false },
     })
 
+    -- Note about cmp.setup.filetype(): When a filetype-specific setup is not defined,
+    -- it inherits all sources from the global setup. However, when defining a
+    -- filetype-specific setup, you must explicitly list ALL desired sources
     cmp.setup.filetype('gitcommit', {
       sources = cmp.config.sources({
         { name = 'git' },
