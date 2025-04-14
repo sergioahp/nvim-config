@@ -39,6 +39,7 @@ return {
           nvim_lua = "",
           latex_symbols = "𝓛",
           ["cmp-dbee"] = "",
+          git = "",
         },
         maxwidth = {
             menu = 50,
