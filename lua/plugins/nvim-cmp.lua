@@ -9,7 +9,10 @@ return {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind.nvim',
-    'petertriho/cmp-git',
+    {
+      'petertriho/cmp-git',
+      opts = true,
+    },
     {
       -- Issue: cmp-dbee require()s dbee even on files it's it shouldn't provide
       -- completions on
