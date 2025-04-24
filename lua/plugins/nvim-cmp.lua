@@ -33,7 +33,7 @@ return {
       format = lspkind.cmp_format({
         mode = 'symbol',
         menu = {
-          buffer = "b",
+          buffer = "",
           nvim_lsp = "L",
           luasnip = "",
           nvim_lua = "",
