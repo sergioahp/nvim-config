@@ -76,7 +76,7 @@ return {
       desc = 'telescope keymaps'
     },
     {
-      '<leader>g',
+      '<leader>gf',
       function ()
         require('telescope.builtin').git_files()
       end,
@@ -92,7 +92,7 @@ return {
       desc = 'telescope git commits'
     },
     {
-      '<leader>gb',
+      '<leader>gm',
       function ()
         require('telescope.builtin').git_bcommits()
       end,
@@ -100,7 +100,7 @@ return {
       desc = 'telescope git buffer commits'
     },
     {
-      '<leader>gr',
+      '<leader>gb',
       function ()
         require('telescope.builtin').git_branches()
       end,
