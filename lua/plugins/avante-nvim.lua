@@ -5,14 +5,15 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    provider = "claude",
+    provider = "openai",
     openai = {
       endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-      timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-      temperature = 0,
-      max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-      --reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+      model = "gpt-4.1", -- your desired model (or use gpt-4o, etc.)
+      -- timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+      -- temperature = 0,
+      -- max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+      reasoning_effort = "high", -- low|medium|high, only used for reasoning models
+      api_key_name = "AVANTE_OPENAI_API_KEY",
     },
     aihubmix = {
       model = "DeepSeek-R1",
@@ -39,6 +40,36 @@ return {
         api_key_name = "AVANTE_PERPLEXITY_API_KEY",
         endpoint = "https://api.perplexity.ai",
         model = "sonar-deep-research",
+      },
+      perplexity3 = {
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_PERPLEXITY_API_KEY",
+        endpoint = "https://api.perplexity.ai",
+        model = "sonar-reasoning-pro",
+      },
+      perplexity4 = {
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_PERPLEXITY_API_KEY",
+        endpoint = "https://api.perplexity.ai",
+        model = "sonar-reasoning",
+      },
+      perplexity5 = {
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_PERPLEXITY_API_KEY",
+        endpoint = "https://api.perplexity.ai",
+        model = "sonar-pro",
+      },
+      perplexity6 = {
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_PERPLEXITY_API_KEY",
+        endpoint = "https://api.perplexity.ai",
+        model = "sonar",
+      },
+      perplexity7 = {
+        __inherited_from = "openai",
+        api_key_name = "AVANTE_PERPLEXITY_API_KEY",
+        endpoint = "https://api.perplexity.ai",
+        model = "r1-1776",
       },
       -- gemini_exp = {
       --   __inherited_from = "aihubmix",
