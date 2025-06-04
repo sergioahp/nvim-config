@@ -29,6 +29,7 @@ return {
   opts = function (_, opts)
     local cmp = require('cmp')
     local lspkind = require('lspkind')
+    opts.preselect = require('cmp').PreselectMode.None -- Do not preselect any item by default
     opts.formatting = {
       format = lspkind.cmp_format({
         mode = 'symbol',
