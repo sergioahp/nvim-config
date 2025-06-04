@@ -6,29 +6,35 @@ return {
     -- add any opts here
     -- for example
     provider = "openai",
-    openai = {
-      endpoint = "https://api.openai.com/v1",
-      model = "gpt-4.1", -- your desired model (or use gpt-4o, etc.)
-      -- timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-      -- temperature = 0,
-      -- max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-      reasoning_effort = "high", -- low|medium|high, only used for reasoning models
-      api_key_name = "AVANTE_OPENAI_API_KEY",
-    },
-    aihubmix = {
-      model = "DeepSeek-R1",
-      api_key_name = "AVANTE_AIHUBMIX_API_KEY"
-    },
-    claude = {
-      endpoint = "https://api.anthropic.com",
-      model = "claude-3-5-sonnet-20241022",
-      api_key_name = "AVANTE_ANTHROPIC_API_KEY",
-      timeout = 30000, -- Timeout in milliseconds
-      temperature = 0,
-      max_tokens = 4096,
-      -- disable_tools = { "bash", "python" }, -- disable tools!
-    },
-    vendors = {
+    providers = {
+      openai = {
+        endpoint = "https://api.openai.com/v1",
+        model = "gpt-4.1", -- your desired model (or use gpt-4o, etc.)
+        -- timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+        -- temperature = 0,
+        -- max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+        extra_request_body = {
+          reasoning_effort = "high", -- low|medium|high, only used for reasoning models
+        },
+        api_key_name = "AVANTE_OPENAI_API_KEY",
+      },
+      aihubmix = {
+        __inherited_from = "openai",
+        endpoint = "https://api.aihubmix.com/v1",
+        model = "gemini-2.5-pro-preview-05-06",
+        api_key_name = "AVANTE_AIHUBMIX_API_KEY"
+      },
+      claude = {
+        endpoint = "https://api.anthropic.com",
+        model = "claude-3-5-sonnet-20241022",
+        api_key_name = "AVANTE_ANTHROPIC_API_KEY",
+        timeout = 30000, -- Timeout in milliseconds
+        extra_request_body = {
+          temperature = 0,
+          max_tokens = 4096,
+        },
+        -- disable_tools = { "bash", "python" }, -- disable tools!
+      },
       perplexity = {
         __inherited_from = "openai",
         api_key_name = "AVANTE_PERPLEXITY_API_KEY",
@@ -71,10 +77,12 @@ return {
         endpoint = "https://api.perplexity.ai",
         model = "r1-1776",
       },
-      -- gemini_exp = {
-      --   __inherited_from = "aihubmix",
-      --   model = "gemini-2.5-pro-exp-03-25",
-      -- },
+      gemini_exp = {
+        __inherited_from = "openai",
+        endpoint = "https://api.aihubmix.com/v1",
+        model = "gemini-2.5-pro-exp-03-25",
+        api_key_name = "AVANTE_AIHUBMIX_API_KEY"
+      },
     },
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
