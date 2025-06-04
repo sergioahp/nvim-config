@@ -108,6 +108,14 @@ return {
       desc = 'telescope git branches'
     },
     {
+      '<leader>ge',
+      function ()
+        require('config.multigrep').live_multigrep({ git_files = true })
+      end,
+      '',
+      desc = 'telescope multigrep on git-tracked files',
+    },
+    {
       '<leader>gl',
       function ()
         require('telescope.builtin').live_grep({ grep_open_files = true })
