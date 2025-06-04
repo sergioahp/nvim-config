@@ -14,7 +14,7 @@ return {
         -- temperature = 0,
         -- max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
         extra_request_body = {
-          reasoning_effort = "high", -- low|medium|high, only used for reasoning models
+          reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
         },
         api_key_name = "AVANTE_OPENAI_API_KEY",
       },
@@ -25,14 +25,13 @@ return {
         api_key_name = "AVANTE_AIHUBMIX_API_KEY"
       },
       claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-3-5-sonnet-20241022",
+        model = "claude-sonnet-4-20250514",
         api_key_name = "AVANTE_ANTHROPIC_API_KEY",
-        timeout = 30000, -- Timeout in milliseconds
-        extra_request_body = {
-          temperature = 0,
-          max_tokens = 4096,
-        },
+        -- timeout = 30000, -- Timeout in milliseconds
+        -- extra_request_body = {
+        --   temperature = 0,
+        --   max_tokens = 4096,
+        -- },
         -- disable_tools = { "bash", "python" }, -- disable tools!
       },
       perplexity = {
