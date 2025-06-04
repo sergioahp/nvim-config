@@ -82,7 +82,7 @@ local M = {
   end,
   opts = {
     ensure_installed = {
-      "c", "lua", "vim", "vimdoc", "query", "javascript", "html",
+      "c", "lua", "vim", "vimdoc", "query", "javascript", "typescript", "tsx", "html",
       "typst", "bash", "luadoc", "markdown", "requirements", "toml",
       "yaml", "python", "nix", "yuck", "rust", "sql",
     },
