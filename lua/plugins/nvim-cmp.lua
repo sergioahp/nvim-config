@@ -9,6 +9,7 @@ return {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'onsails/lspkind.nvim',
+    -- 'sergioahp/cmp-ai',
     {
       'petertriho/cmp-git',
       opts = true,
@@ -64,18 +65,25 @@ return {
         end
         cmp.select_prev_item()
       end,
+      ['<C-m>'] = require('minuet').make_cmp_map()
     }
     opts.sources = cmp.config.sources({
+      -- { name = 'cmp_ai', keyword_length = 0 },
       { name = 'git' },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
     }, {
       { name = 'buffer' },
     })
+    -- opts.sources = { { name = 'cmp_ai' } }
+    -- print(vim.inspect(opts.sources))
     opts.snippet = {
       expand = function (args)
         require'luasnip'.lsp_expand(args.body)
       end
+    }
+    opts.performance = {
+      fetching_timeout = 2000,
     }
   end,
   config = function (_, opts)
