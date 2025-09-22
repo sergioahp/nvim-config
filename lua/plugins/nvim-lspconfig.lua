@@ -52,7 +52,7 @@ return {
         },
         {
           '',
-          '[g',
+          '[h',
           function ()
             vim.diagnostic.goto_prev({ severity = "HINT" })
           end,
@@ -60,7 +60,7 @@ return {
         },
         {
           '',
-          ']g',
+          ']h',
           function ()
             vim.diagnostic.goto_next({ severity = "HINT" })
           end,
@@ -134,15 +134,21 @@ return {
       }
       local per_server = {
         ltex_plus = {
-          autostart = false,
+          autostart = true,
           on_attach = function(client, bufnr)
-            require("ltex_extra").setup {}
+            require("ltex_extra").setup {
+              load_langs = { "en-US", "es" },
+            }
           end,
+          settings = {
+            ltex = { language = "en" },
+          },
         },
         lua_ls = {},
         pylsp = {},
         nil_ls = {},
         tinymist = {
+          autostart = true,
           settings = {
             exportPdf = "onType",
           },
