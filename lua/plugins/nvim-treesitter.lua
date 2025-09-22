@@ -1,14 +1,24 @@
 local textobj_pairs = {
-  t = { inner = "@attribute.inner",   outer = "@attribute.outer"   },
-  b = { inner = "@block.inner",       outer = "@block.outer"       },
-  c = { inner = "@call.inner",        outer = "@call.outer"        },
-  k = { inner = "@class.inner",       outer = "@class.outer"       },
+  -- u for attribUte
+  u = { inner = "@attribute.inner",   outer = "@attribute.outer"   },
+
+  g = { inner = "@block.inner",       outer = "@block.outer"       },
+  -- K for kall (frequently used mapping)
+  k = { inner = "@call.inner",        outer = "@call.outer"        },
+  -- c for Class (frequently used mapping)
+  c = { inner = "@class.inner",       outer = "@class.outer"       },
+  -- m for coMMent (frequently used mapping)
   m = { inner = "@comment.inner",     outer = "@comment.outer"     },
-  o = { inner = "@conditional.inner", outer = "@conditional.outer" },
-  r = { inner = "@frame.inner",       outer = "@frame.outer"       },
+  -- Think of v as a branching point (it visually branches) (frequently used mapping)
+  v = { inner = "@conditional.inner", outer = "@conditional.outer" },
+
+  i = { inner = "@frame.inner",       outer = "@frame.outer"       },
+
   f = { inner = "@function.inner",    outer = "@function.outer"    },
-  l = { inner = "@loop.inner",        outer = "@loop.outer"        },
-  a = { inner = "@parameter.inner",   outer = "@parameter.outer"   },
+  -- j for the j we use in a for loop (frequently used mapping)
+  j = { inner = "@loop.inner",        outer = "@loop.outer"        },
+  -- r for parameter
+  r = { inner = "@parameter.inner",   outer = "@parameter.outer"   },
 }
 
 -- Non-paired textobjects.
@@ -17,7 +27,7 @@ local nonpaired = {
   h = "@assignment.inner",
   e = "@assignment.lhs",
   r = "@assignment.rhs",
-  u = "@number.inner",
+  y = "@number.inner",
 }
 
 -- Build the select keymaps table dynamically.
@@ -53,23 +63,17 @@ local goto_next_end   = {}
 local goto_prev_start = {}
 local goto_prev_end   = {}
 for letter, obj in pairs(textobj_pairs) do
-  -- Outer textobject moves.
-  goto_next_start["<leader>n" .. letter] = obj.outer
-  goto_prev_start["<leader>p" .. letter] = obj.outer
-  goto_next_end["<leader>n" .. string.upper(letter)] = obj.outer
-  goto_prev_end["<leader>p" .. string.upper(letter)] = obj.outer
-
-  -- Inner textobject moves.
-  goto_next_start["<leader>N" .. letter] = obj.inner
-  goto_prev_start["<leader>P" .. letter] = obj.inner
-  goto_next_end["<leader>N" .. string.upper(letter)] = obj.inner
-  goto_prev_end["<leader>P" .. string.upper(letter)] = obj.inner
+  -- Inner textobject moves (using ]letter format)
+  goto_next_start["]" .. letter] = obj.inner
+  goto_prev_start["[" .. letter] = obj.inner
+  goto_next_end["]" .. string.upper(letter)] = obj.inner
+  goto_prev_end["[" .. string.upper(letter)] = obj.inner
 end
 for key, capture in pairs(nonpaired) do
-  goto_next_start["<leader>n" .. key] = capture
-  goto_prev_start["<leader>p" .. key] = capture
-  goto_next_end["<leader>n" .. string.upper(key)] = capture
-  goto_prev_end["<leader>p" .. string.upper(key)] = capture
+  goto_next_start["]" .. key] = capture
+  goto_prev_start["[" .. key] = capture
+  goto_next_end["]" .. string.upper(key)] = capture
+  goto_prev_end["[" .. string.upper(key)] = capture
 end
 
 local M = {
