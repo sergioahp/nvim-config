@@ -112,7 +112,7 @@ local M = {
       },
       move = {
         enable = true,
-        set_jumps = false,
+        set_jumps = true,
         goto_next_start     = goto_next_start,
         goto_next_end       = goto_next_end,
         goto_previous_start = goto_prev_start,
