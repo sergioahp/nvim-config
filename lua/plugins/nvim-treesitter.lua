@@ -1,22 +1,23 @@
 local textobj_pairs = {
-  -- u for attribUte
-  u = { inner = "@attribute.inner",   outer = "@attribute.outer"   },
+  -- -- not so common, usen in tsx, html, astro, etc
+  -- y = { inner = "@attribute.inner",   outer = "@attribute.outer"   },
 
-  g = { inner = "@block.inner",       outer = "@block.outer"       },
-  -- K for kall (frequently used mapping)
-  k = { inner = "@call.inner",        outer = "@call.outer"        },
-  -- c for Class (frequently used mapping)
-  c = { inner = "@class.inner",       outer = "@class.outer"       },
-  -- m for coMMent (frequently used mapping)
-  m = { inner = "@comment.inner",     outer = "@comment.outer"     },
-  -- Think of v as a branching point (it visually branches) (frequently used mapping)
-  v = { inner = "@conditional.inner", outer = "@conditional.outer" },
-
-  i = { inner = "@frame.inner",       outer = "@frame.outer"       },
-
-  f = { inner = "@function.inner",    outer = "@function.outer"    },
-  -- j for the j we use in a for loop (frequently used mapping)
-  j = { inner = "@loop.inner",        outer = "@loop.outer"        },
+  -- maybe not so frequenly used
+  -- y = { inner = "@block.inner",       outer = "@block.outer"       },
+  -- maybe not so frequenly used commented out for now
+  -- (you can you parenthesis btw, yi(, vi(, etc)
+  -- -- K for kall (frequently used mapping)
+  -- k = { inner = "@call.inner",        outer = "@call.outer"        },
+  -- K for Klass (frequently used mapping)
+  k = { inner = "@class.inner",       outer = "@class.outer"       },
+  -- (frequently used mapping)
+  g = { inner = "@comment.inner",     outer = "@comment.outer"     },
+  -- f for iF statement (frequently used mapping)
+  f = { inner = "@conditional.inner", outer = "@conditional.outer" },
+  -- m for Method/function (matches vim default)
+  m = { inner = "@function.inner",    outer = "@function.outer"    },
+  --  for the j we use in a for loop (frequently used mapping)
+  v = { inner = "@loop.inner",        outer = "@loop.outer"        },
   -- r for parameter
   r = { inner = "@parameter.inner",   outer = "@parameter.outer"   },
 }
@@ -24,10 +25,10 @@ local textobj_pairs = {
 -- Non-paired textobjects.
 -- Here the original select mappings used more than one character.
 local nonpaired = {
-  h = "@assignment.inner",
-  e = "@assignment.lhs",
-  r = "@assignment.rhs",
-  y = "@number.inner",
+  j = "@assignment.inner",
+  -- e = "@assignment.lhs",
+  -- r = "@assignment.rhs",
+  u = "@number.inner",
 }
 
 -- Build the select keymaps table dynamically.
@@ -76,6 +77,7 @@ for key, capture in pairs(nonpaired) do
   goto_prev_end["[" .. string.upper(key)] = capture
 end
 
+-- Add fold navigation keymaps
 local M = {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {

@@ -100,7 +100,7 @@ return {
         },
         {
           '',
-          '[r',
+          '[e',
           function ()
             vim.diagnostic.goto_prev({ severity = "ERROR" })
           end,
@@ -108,7 +108,7 @@ return {
         },
         {
           '',
-          ']r',
+          ']e',
           function ()
             vim.diagnostic.goto_next({ severity = "ERROR" })
           end,
