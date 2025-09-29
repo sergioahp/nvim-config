@@ -42,6 +42,36 @@ return {
           end,
           { desc = "open diagnostic under cursor" },
         },
+        -- {
+        --   'i',
+        --   '<c-i>',
+        --   function()
+        --     vim.lsp.buf.signature_help({
+        --       close_events = {'BufLeave', 'InsertLeave'},
+        --     })
+        --   end,
+        --   { desc = "signature help" },
+        -- },
+        -- NOTE: For some reason <C-i> works when set with:
+        -- :lua vim.keymap.set('i', '<C-i>', function() vim.lsp.buf.signature_help({ close_events = {'BufLeave', 'InsertLeave'} }) end, { desc = "signature help" })
+        -- but not like it is on the config above: in the config it cannot distinguish between <C-i> and Tab and both are mapped to that same function
+        -- Same bug occurs with nvim_buf_set_keymap:
+        -- :lua vim.api.nvim_buf_set_keymap(0, 'i', '<C-i>', '', { noremap = true, callback = function() vim.lsp.buf.signature_help({ close_events = {'BufLeave', 'InsertLeave'} }) end, desc = "signature help" })
+        -- The issue is the buffer = bufnr argument - buffer-local mappings don't distinguish <C-i> from <Tab>:
+        -- :lua vim.keymap.set('i', '<C-i>', function() vim.lsp.buf.signature_help({ close_events = {'BufLeave', 'InsertLeave'} }) end, { desc = "signature help", noremap = true, buffer = 0 })
+        -- This is a known issue: https://github.com/neovim/neovim/issues/28022
+        -- Buffer-local mappings don't properly handle CSI extended keys/modifyOtherKeys even in supported terminals
+        -- Workaround: Use global_only flag to set as global mapping instead of buffer-local
+        {
+          'i',
+          '<C-i>',
+          function()
+            vim.lsp.buf.signature_help({
+              close_events = {'BufLeave', 'InsertLeave'},
+            })
+          end,
+          { desc = "signature help", global_only = true },
+        },
         {
           '',
           '[d',
@@ -131,12 +161,20 @@ return {
             local lhs = v[2]
             local rhs = v[3]
             local _opts = v[4]
-            _opts = vim.tbl_deep_extend(
-              'keep',
-              _opts,
-              { noremap = true, buffer = bufnr }
-            )
-            vim.keymap.set(mode, lhs, rhs, _opts)
+            if _opts.global_only then
+              -- Set as global mapping, removing our custom flag
+              local opts = vim.tbl_deep_extend('keep', _opts, { noremap = true })
+              opts.global_only = nil
+              vim.keymap.set(mode, lhs, rhs, opts)
+            else
+              -- Set as buffer-local mapping
+              _opts = vim.tbl_deep_extend(
+                'keep',
+                _opts,
+                { noremap = true, buffer = bufnr }
+              )
+              vim.keymap.set(mode, lhs, rhs, _opts)
+            end
           end
         end,
       }
