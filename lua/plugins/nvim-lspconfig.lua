@@ -46,7 +46,7 @@ return {
           '',
           '[d',
           function ()
-            vim.diagnostic.goto_prev()
+            vim.diagnostic.jump({ count = -1, float = true })
           end,
           { desc = "previous diagnostic" },
         },
@@ -54,7 +54,7 @@ return {
           '',
           ']d',
           function ()
-            vim.diagnostic.goto_next()
+            vim.diagnostic.jump({ count = 1, float = true })
           end,
           { desc = "next diagnostic" },
         },
@@ -62,7 +62,7 @@ return {
           '',
           '[h',
           function ()
-            vim.diagnostic.goto_prev({ severity = "HINT" })
+            vim.diagnostic.jump({ count = -1, float = true, severity = "HINT" })
           end,
           { desc = "previous hint" },
         },
@@ -70,7 +70,7 @@ return {
           '',
           ']h',
           function ()
-            vim.diagnostic.goto_next({ severity = "HINT" })
+            vim.diagnostic.jump({ count = 1, float = true, severity = "HINT" })
           end,
           { desc = "next hint" },
         },
@@ -78,7 +78,7 @@ return {
           '',
           '[s',
           function ()
-            vim.diagnostic.goto_prev({ severity = "INFO" })
+            vim.diagnostic.jump({ count = -1, float = true, severity = "INFO" })
           end,
           { desc = "previous info" },
         },
@@ -86,7 +86,7 @@ return {
           '',
           ']s',
           function ()
-            vim.diagnostic.goto_next({ severity = "INFO" })
+            vim.diagnostic.jump({ count = 1, float = true, severity = "INFO" })
           end,
           { desc = "next info" },
         },
@@ -94,7 +94,7 @@ return {
           '',
           '[w',
           function ()
-            vim.diagnostic.goto_prev({ severity = "WARN" })
+            vim.diagnostic.jump({ count = -1, float = true, severity = "WARN" })
           end,
           { desc = "previous warning" },
         },
@@ -102,7 +102,7 @@ return {
           '',
           ']w',
           function ()
-            vim.diagnostic.goto_next({ severity = "WARN" })
+            vim.diagnostic.jump({ count = 1, float = true, severity = "WARN" })
           end,
           { desc = "next warning" },
         },
@@ -110,7 +110,7 @@ return {
           '',
           '[e',
           function ()
-            vim.diagnostic.goto_prev({ severity = "ERROR" })
+            vim.diagnostic.jump({ count = -1, float = true, severity = "ERROR" })
           end,
           { desc = "previous error" },
         },
@@ -118,7 +118,7 @@ return {
           '',
           ']e',
           function ()
-            vim.diagnostic.goto_next({ severity = "ERROR" })
+            vim.diagnostic.jump({ count = 1, float = true, severity = "ERROR" })
           end,
           { desc = "next error" },
         },
