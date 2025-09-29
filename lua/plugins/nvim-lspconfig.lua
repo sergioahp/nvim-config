@@ -36,6 +36,14 @@ return {
         },
         {
           '',
+          '<leader>ld',
+          function()
+            vim.diagnostic.open_float()
+          end,
+          { desc = "open diagnostic under cursor" },
+        },
+        {
+          '',
           '[d',
           function ()
             vim.diagnostic.goto_prev()
