@@ -29,7 +29,7 @@ return {
   },
   keys = {
     {
-      "<c-i>", function ()
+      "<c-o>", function ()
         require("minuet.virtualtext").action.accept()
       end,
       silent = true,
