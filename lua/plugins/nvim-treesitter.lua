@@ -12,20 +12,22 @@ local textobj_pairs = {
   k = { inner = "@class.inner",       outer = "@class.outer"       },
   -- (frequently used mapping)
   g = { inner = "@comment.inner",     outer = "@comment.outer"     },
-  -- f for iF statement (frequently used mapping)
-  f = { inner = "@conditional.inner", outer = "@conditional.outer" },
+  -- f for Function call (matches mini.ai)
+  f = { inner = "@call.inner",        outer = "@call.outer"        },
   -- m for Method/function (matches vim default)
   m = { inner = "@function.inner",    outer = "@function.outer"    },
   --  for the j we use in a for loop (frequently used mapping)
   v = { inner = "@loop.inner",        outer = "@loop.outer"        },
   -- r for parameter
   r = { inner = "@parameter.inner",   outer = "@parameter.outer"   },
+  -- j for Jump/conditional (if/else statements)
+  j = { inner = "@conditional.inner", outer = "@conditional.outer" },
 }
 
 -- Non-paired textobjects.
 -- Here the original select mappings used more than one character.
 local nonpaired = {
-  j = "@assignment.inner",
+  z = "@assignment.inner",
   -- e = "@assignment.lhs",
   -- r = "@assignment.rhs",
   u = "@number.inner",
@@ -78,6 +80,9 @@ for key, capture in pairs(nonpaired) do
 end
 
 -- Add fold navigation keymaps
+goto_next_start["]y"] = { query = "@fold", query_group = "folds", desc = "Next fold" }
+goto_prev_start["[y"] = { query = "@fold", query_group = "folds", desc = "Previous fold" }
+
 local M = {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
@@ -137,6 +142,9 @@ local M = {
     vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true, silent = true })
     vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true, silent = true })
     vim.treesitter.language.register("markdown", "octo")
+    
+    -- Setup custom textobjects for next/previous functions
+    -- require("custom.textobjects").setup()
   end,
 }
 
