@@ -66,11 +66,11 @@ local goto_next_end   = {}
 local goto_prev_start = {}
 local goto_prev_end   = {}
 for letter, obj in pairs(textobj_pairs) do
-  -- Inner textobject moves (using ]letter format)
-  goto_next_start["]" .. letter] = obj.inner
-  goto_prev_start["[" .. letter] = obj.inner
-  goto_next_end["]" .. string.upper(letter)] = obj.inner
-  goto_prev_end["[" .. string.upper(letter)] = obj.inner
+  -- Outer textobject moves (using ]letter format)
+  goto_next_start["]" .. letter] = obj.outer
+  goto_prev_start["[" .. letter] = obj.outer
+  goto_next_end["]" .. string.upper(letter)] = obj.outer
+  goto_prev_end["[" .. string.upper(letter)] = obj.outer
 end
 for key, capture in pairs(nonpaired) do
   goto_next_start["]" .. key] = capture
