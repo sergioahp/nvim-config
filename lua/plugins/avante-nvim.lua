@@ -25,7 +25,7 @@ return {
         api_key_name = "AVANTE_AIHUBMIX_API_KEY"
       },
       claude = {
-        model = "claude-sonnet-4-20250514",
+        model = "claude-sonnet-4-5",
         api_key_name = "AVANTE_ANTHROPIC_API_KEY",
         -- timeout = 30000, -- Timeout in milliseconds
         -- extra_request_body = {
