@@ -52,12 +52,85 @@ return {
       desc = 'telescope grep inside current dir'
     },
     {
-      '<leader>ft',
+      '<leader>ee',
       function ()
         require('telescope.builtin').treesitter()
       end,
       '',
       desc = 'telescope treesitter'
+    },
+    {
+      '<leader>tt',
+      function ()
+        require('telescope.builtin').lsp_document_symbols()
+      end,
+      '',
+      desc = 'telescope lsp document symbols'
+    },
+    {
+      '<leader>tT',
+      function ()
+        require('telescope.builtin').lsp_workspace_symbols()
+      end,
+      '',
+      desc = 'telescope lsp workspace symbols'
+    },
+    -- t for treesitter - symbol search using textobject suffixes (via treesitter)
+    {
+      '<leader>tm',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "method" } })
+      end,
+      '',
+      desc = 'telescope treesitter search methods'
+    },
+    {
+      '<leader>tf',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "function" } })
+      end,
+      '',
+      desc = 'telescope treesitter search functions'
+    },
+    {
+      '<leader>tv',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "var" } })
+      end,
+      '',
+      desc = 'telescope treesitter search variables'
+    },
+    {
+      '<leader>ti',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "field" } })
+      end,
+      '',
+      desc = 'telescope treesitter search fields'
+    },
+    {
+      '<leader>tr',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "parameter" } })
+      end,
+      '',
+      desc = 'telescope treesitter search parameters'
+    },
+    {
+      '<leader>ty',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "type" } })
+      end,
+      '',
+      desc = 'telescope treesitter search types'
+    },
+    {
+      '<leader>to',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "import" } })
+      end,
+      '',
+      desc = 'telescope treesitter search imports'
     },
     {
       '<leader>fR',
@@ -199,10 +272,10 @@ return {
       '',
       desc = 'telescope resume last search',
     },
-    -- t for treesitter/symbols - symbol search using textobject suffixes (via LSP)
+    -- e for lsp symbols - symbol search using textobject suffixes (via LSP)
     -- we might want to explore how treesitter text objects does it too, but LSP is cool too
     {
-      '<leader>tk',
+      '<leader>ek',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Class", "Struct", "Interface" } })
       end,
@@ -210,15 +283,15 @@ return {
       desc = 'telescope search classes'
     },
     {
-      '<leader>tm',
+      '<leader>em',
       function()
-        require('telescope.builtin').lsp_document_symbols({ symbols = { "Function", "Method" } })
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Method" } })
       end,
       '',
-      desc = 'telescope search functions/methods'
+      desc = 'telescope search methods'
     },
     {
-      '<leader>tf',
+      '<leader>ef',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Function" } })
       end,
@@ -226,7 +299,7 @@ return {
       desc = 'telescope search functions'
     },
     {
-      '<leader>tv',
+      '<leader>ev',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Variable" } })
       end,
@@ -234,7 +307,7 @@ return {
       desc = 'telescope search variables'
     },
     {
-      '<leader>tj',
+      '<leader>ej',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Constructor" } })
       end,
@@ -242,7 +315,7 @@ return {
       desc = 'telescope search constructors'
     },
     {
-      '<leader>tr',
+      '<leader>ei',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Property", "Field" } })
       end,
@@ -250,7 +323,15 @@ return {
       desc = 'telescope search properties/fields'
     },
     {
-      '<leader>tg',
+      '<leader>er',
+      function()
+        require('telescope.builtin').treesitter({ symbols = { "parameter" } })
+      end,
+      '',
+      desc = 'telescope search parameters'
+    },
+    {
+      '<leader>eg',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Constant" } })
       end,
@@ -258,7 +339,7 @@ return {
       desc = 'telescope search constants'
     },
     {
-      '<leader>tz',
+      '<leader>ez',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Variable", "Field" } })
       end,
@@ -266,12 +347,85 @@ return {
       desc = 'telescope search assignments'
     },
     {
-      '<leader>tu',
+      '<leader>eu',
       function()
         require('telescope.builtin').lsp_document_symbols({ symbols = { "Number", "String", "Constant" } })
       end,
       '',
       desc = 'telescope search literals'
+    },
+    -- Capitalized suffixes for workspace-wide symbol search
+    {
+      '<leader>eK',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Class", "Struct", "Interface" } })
+      end,
+      '',
+      desc = 'telescope search classes (workspace)'
+    },
+    {
+      '<leader>eM',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Method" } })
+      end,
+      '',
+      desc = 'telescope search methods (workspace)'
+    },
+    {
+      '<leader>eF',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Function" } })
+      end,
+      '',
+      desc = 'telescope search functions (workspace)'
+    },
+    {
+      '<leader>eV',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Variable" } })
+      end,
+      '',
+      desc = 'telescope search variables (workspace)'
+    },
+    {
+      '<leader>eJ',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Constructor" } })
+      end,
+      '',
+      desc = 'telescope search constructors (workspace)'
+    },
+    {
+      '<leader>eI',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Property", "Field" } })
+      end,
+      '',
+      desc = 'telescope search properties/fields (workspace)'
+    },
+    {
+      '<leader>eG',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Constant" } })
+      end,
+      '',
+      desc = 'telescope search constants (workspace)'
+    },
+    {
+      '<leader>eZ',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Variable", "Field" } })
+      end,
+      '',
+      desc = 'telescope search assignments (workspace)'
+    },
+    {
+      '<leader>eU',
+      function()
+        require('telescope.builtin').lsp_workspace_symbols({ symbols = { "Number", "String", "Constant" } })
+      end,
+      '',
+      desc = 'telescope search literals (workspace)'
     },
   },
   opts = function ()
