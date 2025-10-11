@@ -225,14 +225,12 @@ return {
       )
 
       -- local servers = { 'lua_ls', 'pylsp', 'nil_ls', 'rust_analyzer', }
-      local lspconfig = require('lspconfig')
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
       for server, setup_args in pairs(opts._user_settings.per_server) do
         local tbl = vim.tbl_deep_extend('force', opts._user_settings.global_options, setup_args)
         -- print(vim.inspect(tbl))
-        lspconfig[server].setup(
-          tbl
-        )
+        vim.lsp.config(server, tbl)
+        vim.lsp.enable(server)
       end
     end,
   },
