@@ -199,6 +199,80 @@ return {
       '',
       desc = 'telescope resume last search',
     },
+    -- t for treesitter/symbols - symbol search using textobject suffixes (via LSP)
+    -- we might want to explore how treesitter text objects does it too, but LSP is cool too
+    {
+      '<leader>tk',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Class", "Struct", "Interface" } })
+      end,
+      '',
+      desc = 'telescope search classes'
+    },
+    {
+      '<leader>tm',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Function", "Method" } })
+      end,
+      '',
+      desc = 'telescope search functions/methods'
+    },
+    {
+      '<leader>tf',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Function" } })
+      end,
+      '',
+      desc = 'telescope search functions'
+    },
+    {
+      '<leader>tv',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Variable" } })
+      end,
+      '',
+      desc = 'telescope search variables'
+    },
+    {
+      '<leader>tj',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Constructor" } })
+      end,
+      '',
+      desc = 'telescope search constructors'
+    },
+    {
+      '<leader>tr',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Property", "Field" } })
+      end,
+      '',
+      desc = 'telescope search properties/fields'
+    },
+    {
+      '<leader>tg',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Constant" } })
+      end,
+      '',
+      desc = 'telescope search constants'
+    },
+    {
+      '<leader>tz',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Variable", "Field" } })
+      end,
+      '',
+      desc = 'telescope search assignments'
+    },
+    {
+      '<leader>tu',
+      function()
+        require('telescope.builtin').lsp_document_symbols({ symbols = { "Number", "String", "Constant" } })
+      end,
+      '',
+      desc = 'telescope search literals'
+    },
   },
   opts = function ()
     return {
