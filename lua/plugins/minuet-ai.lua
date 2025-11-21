@@ -1,17 +1,21 @@
 return {
   -- dir = "/home/admin/.config/nvim/llm_context/minuet-ai.nvim",
   -- name = "minuet-ai",
+  enabled = true,
   "milanglacier/minuet-ai.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
-    provider = "openai",
-    openai = {
-      model = "gpt-4.1",
-      api_key = os.getenv("OPENAI_API_KEY"),
-      optional = {
-        -- not working
-        max_tokens = 256,
-        temperature = 0.1,
+    provider = "codestral",
+    provider_options = {
+      codestral = {
+        model = "codestral-latest",
+        end_point = "https://api.mistral.ai/v1/fim/completions",
+        api_key = "MISTRAL_API_KEY",
+        stream = true,
+        optional = {
+          max_tokens = 256,
+          stop = { '\n\n' },
+        },
       },
     },
     -- Enable nvim-cmp integration
@@ -26,8 +30,9 @@ return {
     },
     throttle = 0,
     debounce = 0,
-    n_completions = 1,
+    n_completions = 3,
     request_timeout = 10,
+    before_cursor_filter_length = 0,
   },
   keys = {
     {

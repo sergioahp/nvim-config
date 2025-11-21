@@ -6,10 +6,6 @@ return {
         'hrsh7th/cmp-nvim-lsp'
       },
       {
-        'barreiroleo/ltex_extra.nvim',
-        -- comentario
-      },
-      {
         'folke/lazydev.nvim',
         ft = 'lua',
         opts = {
@@ -179,17 +175,6 @@ return {
         end,
       }
       local per_server = {
-        ltex_plus = {
-          autostart = false,
-          on_attach = function(client, bufnr)
-            require("ltex_extra").setup {
-              load_langs = { "en-US", "es" },
-            }
-          end,
-          settings = {
-            ltex = { language = "en" },
-          },
-        },
         lua_ls = {},
         pylsp = {},
         nil_ls = {},
@@ -207,6 +192,9 @@ return {
               },
             },
           },
+        },
+        clangd = {
+          cmd = { "clangd", "--background-index", "--clang-tidy" },
         },
       }
       opts._user_settings = {
