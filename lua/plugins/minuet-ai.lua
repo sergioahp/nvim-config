@@ -62,7 +62,7 @@ return {
     },
     {
       "<c-c>", function ()
-        require("minuet.virtualtext").action.enable_auto_trigger()
+        require("minuet.virtualtext").action.toggle_auto_trigger()
       end,
       silent = true,
       mode = "i",
