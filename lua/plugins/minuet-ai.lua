@@ -18,9 +18,11 @@ return {
     cmp = {
       enable = true,
     },
-    -- Virtual text settings (disabled by default)
+    -- Virtual text settings
     virtualtext = {
-      auto_trigger_ft = { "rust", "python", "lua" }, -- Empty means no auto-trigger
+      auto_trigger_ft = { "rust", "python", "lua", "yaml", "nix", "typst" },
+      -- Show virtual text suggestions even when cmp menu is visible
+      show_on_completion_menu = true,
     },
     throttle = 0,
     debounce = 0,
