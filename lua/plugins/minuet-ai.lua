@@ -1,6 +1,6 @@
 return {
-  -- dir = "/home/admin/.config/nvim/llm_context/minuet-ai.nvim",
-  -- name = "minuet-ai",
+  dir = vim.fn.expand("~/code/lua/minuet-ai.nvim"),
+  name = "minuet-ai",
   enabled = true,
   "milanglacier/minuet-ai.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
@@ -33,6 +33,7 @@ return {
     n_completions = 3,
     request_timeout = 10,
     before_cursor_filter_length = 0,
+    after_cursor_filter_length = 0,
   },
   keys = {
     {
