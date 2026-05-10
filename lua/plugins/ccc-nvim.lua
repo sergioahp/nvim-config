@@ -22,7 +22,12 @@ return {
         end
       end,
       ""
-    }
+    },
+    {
+      "<leader>cp",
+      "<cmd>CccPick<cr>",
+      desc = "Pick/edit color under cursor"
+    },
   },
   init = function ()
     local editorconfig = require('editorconfig')
