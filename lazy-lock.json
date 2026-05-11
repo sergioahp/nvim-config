@@ -19,7 +19,7 @@
   "maximize.nvim": { "branch": "master", "commit": "d688b66344b03ee6e5a32a0a40af85d174490af8" },
   "mini.ai": { "branch": "main", "commit": "11c57180bc9084089206e211ac7aa598bedc9673" },
   "mini.align": { "branch": "main", "commit": "94af41078e61fbe42ec79f87e67d69c529d3c40a" },
-  "minuet-ai": { "branch": "feat/merged", "commit": "abab10eef4475290132cf37efeb8354377e9e7f8" },
+  "minuet-ai": { "branch": "feat/merged", "commit": "44ca62a06e04162b84fc67efa5afacf1fc30acf4" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-cmp": { "branch": "main", "commit": "b5311ab3ed9c846b585c0c15b7559be131ec4be9" },
   "nvim-dbee": { "branch": "master", "commit": "dda517694889a5d238d7aa407403984da9f80cc0" },
