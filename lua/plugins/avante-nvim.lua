@@ -5,7 +5,7 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    provider = "claude",
+    provider = "openrouter",
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
@@ -18,6 +18,17 @@ return {
         },
         api_key_name = "AVANTE_OPENAI_API_KEY",
       },
+      openrouter = {
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "inception/mercury-2",
+        api_key_name = "OPENROUTER_API_KEY",
+        extra_request_body = {
+          reasoning = {
+            effort = "high",
+          },
+        },
+      },
       aihubmix = {
         __inherited_from = "openai",
         endpoint = "https://api.aihubmix.com/v1",
@@ -25,7 +36,7 @@ return {
         api_key_name = "AVANTE_AIHUBMIX_API_KEY"
       },
       claude = {
-        model = "claude-sonnet-4-5",
+        model = "claude-haiku-4-5",
         api_key_name = "AVANTE_ANTHROPIC_API_KEY",
         -- timeout = 30000, -- Timeout in milliseconds
         -- extra_request_body = {
