@@ -65,7 +65,6 @@ return {
         end
         cmp.select_prev_item()
       end,
-      ['<C-m>'] = require('minuet').make_cmp_map()
     }
     opts.sources = cmp.config.sources({
       -- { name = 'cmp_ai', keyword_length = 0 },
