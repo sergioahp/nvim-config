@@ -1,8 +1,8 @@
 return {
-  dir = vim.fn.expand("~/code/lua/minuet-ai.nvim"),
+  "sergioahp/minuet-ai.nvim",
+  branch = "feat/merged",
   name = "minuet-ai",
   enabled = true,
-  "milanglacier/minuet-ai.nvim",
   dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     provider = "codestral",
@@ -14,7 +14,17 @@ return {
         stream = true,
         optional = {
           max_tokens = 256,
-          stop = { '\n\n' },
+          stop = { '\n' },
+        },
+      },
+      openai_fim_compatible = {
+        model = "mercury-edit-2",
+        end_point = "https://api.inceptionlabs.ai/v1/fim/completions",
+        api_key = "INCEPTION_API_KEY",
+        name = "Inception",
+        stream = true,
+        optional = {
+          max_tokens = 256,
         },
       },
     },
@@ -54,11 +64,14 @@ return {
     },
     {
       "<c-f>", function ()
-        require("minuet.virtualtext").action.next()
+        local m = require("minuet")
+        require("minuet.virtualtext").action.next(
+          m.with.optional("codestral", { stop = { "\n\n" } })
+        )
       end,
       silent = true,
       mode = "i",
-      desc = "Cycle to next suggestion",
+      desc = "Cycle next, or fire multi-line completion if none yet",
     },
     {
       "<c-e>", function ()
@@ -84,5 +97,19 @@ return {
       mode = "i",
       desc = "Dismiss current suggestion",
     },
+    {
+      "<C-,>", function()
+        require("minuet.virtualtext").action.accept_word()
+      end,
+      silent = true,
+      mode = "i",
+      desc = "Accept next word of suggestion",
+    },
   },
+  init = function()
+    -- lazy's keys spec normalizes <C-m> to <CR>; set directly here instead.
+    vim.keymap.set('i', '<C-m>', function()
+      require('minuet.virtualtext').action.accept_until_char()
+    end, { silent = true, desc = 'Accept suggestion until char (f-like)' })
+  end,
 }
