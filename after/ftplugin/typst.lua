@@ -15,7 +15,7 @@ if root_dir then
     filetype = { 'typst' },
     root_dir = root_dir,
     init_options = {
-      backend = "jar", -- "bundle" | "jar" | "server"
+      backend = "jar",
       jar_location = vim.env.LANGUAGETOOL_JAR,
       -- host = "http://127.0.0.1",
       -- port = "8081",
