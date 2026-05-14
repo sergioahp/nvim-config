@@ -32,6 +32,7 @@ return {
     local lspkind = require('lspkind')
     opts.preselect = require('cmp').PreselectMode.None -- Do not preselect any item by default
     opts.formatting = {
+      fields = { 'abbr', 'kind', 'menu' },
       format = lspkind.cmp_format({
         mode = 'symbol',
         menu = {
