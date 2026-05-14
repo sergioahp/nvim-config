@@ -3,7 +3,6 @@ return {
   branch = "feat/merged",
   name = "minuet-ai",
   enabled = true,
-  dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     provider = "codestral",
     provider_options = {
