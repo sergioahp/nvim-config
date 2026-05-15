@@ -34,7 +34,10 @@ return {
     opts.formatting = {
       fields = { 'abbr', 'kind', 'menu' },
       format = lspkind.cmp_format({
-        mode = 'symbol',
+        before = function(_, vim_item)
+          vim_item.kind = lspkind.symbolic(vim_item.kind)
+          return vim_item
+        end,
         menu = {
           buffer = "",
           nvim_lsp = "L",
