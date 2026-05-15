@@ -5,18 +5,26 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    provider = "openrouter",
+    provider = "openai",
+    behaviour = {
+      -- auto-approve file ops but require confirmation for shell execution
+      auto_approve_tool_permissions = {
+        "view", "ls", "glob", "grep",
+        "create", "edit_file", "str_replace", "replace_in_file", "write_to_file", "insert", "undo_edit",
+        "get_diagnostics", "think", "attempt_completion", "read_todos", "write_todos",
+      },
+    },
     providers = {
       openai = {
         endpoint = "https://api.openai.com/v1",
-        model = "gpt-4.1", -- your desired model (or use gpt-4o, etc.)
+        model = "gpt-5.4-nano-2026-03-17", -- default Avante model
         -- timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
         -- temperature = 0,
         -- max_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
         extra_request_body = {
           reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
         },
-        api_key_name = "AVANTE_OPENAI_API_KEY",
+        api_key_name = "OPENAI_API_KEY",
       },
       openrouter = {
         __inherited_from = "openai",
