@@ -1,6 +1,6 @@
 return {
     "kylechui/nvim-surround",
-  config = {
+  opts = {
     move_cursor = "sticky",
   },
   event = { "BufEnter" },
