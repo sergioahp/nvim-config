@@ -94,6 +94,7 @@ for _, v in ipairs(maps) do
 end
 
 vim.diagnostic.config({
+  update_in_insert = true,
   virtual_text = false,
   signs = {
     text = {
@@ -104,4 +105,3 @@ vim.diagnostic.config({
     },
   },
 })
-

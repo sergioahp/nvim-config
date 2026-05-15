@@ -205,13 +205,6 @@ return {
 
     end,
     config = function (_, opts)
-      -- Configure diagnostic updates to happen in insert mode
-      vim.lsp.handlers["textDocument/publishDiagnostic"] = vim.lsp.with(
-        vim.lsp.diagnostic.on_publish_diagnostics, {
-          update_in_insert = true,
-        }
-      )
-
       -- local servers = { 'lua_ls', 'pylsp', 'nil_ls', 'rust_analyzer', }
       -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
       for server, setup_args in pairs(opts._user_settings.per_server) do
