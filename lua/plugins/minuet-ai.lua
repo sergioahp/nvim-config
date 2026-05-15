@@ -1,7 +1,9 @@
 return {
   "sergioahp/minuet-ai.nvim",
-  branch = "feat/merged",
-  name = "minuet-ai",
+  branch = "main",
+  -- commit = "9b1065a1ef891bcd7dfd1830d53355673c9ed951",
+  -- name = "minuet-ai",
+  -- dir = "~/code/lua/minuet-ai.nvim",
   enabled = true,
   opts = {
     provider = "codestral",
@@ -36,6 +38,7 @@ return {
       auto_trigger_ft = { "rust", "python", "lua", "yaml", "nix", "typst" },
       -- Show virtual text suggestions even when cmp menu is visible
       show_on_completion_menu = true,
+      pool_size = 32,
     },
     throttle = 0,
     debounce = 0,
@@ -74,19 +77,11 @@ return {
     },
     {
       "<c-e>", function ()
-        require("minuet.virtualtext").action.prev()
-      end,
-      silent = true,
-      mode = "i",
-      desc = "Cycle to previous suggestion",
-    },
-    {
-      "<c-c>", function ()
         require("minuet.virtualtext").action.toggle_auto_trigger()
       end,
       silent = true,
       mode = "i",
-      desc = "Toggle auto trigger",
+      desc = "Toggle auto trigger (full/off)",
     },
     {
       "<c-a>", function ()
