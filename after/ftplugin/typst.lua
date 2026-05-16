@@ -6,7 +6,11 @@ vim.api.nvim_set_option_value("softtabstop", 2, { buf = 0 })
 -- This setup detects a main.typ file and compiles it
 
 local root_files = { 'main.typ' }
-local paths = vim.fs.find(root_files, { stop = vim.env.HOME })
+local paths = vim.fs.find(root_files, {
+  upward = true,
+  stop = vim.env.HOME,
+  path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+})
 local root_dir = vim.fs.dirname(paths[1])
 
 if root_dir then
