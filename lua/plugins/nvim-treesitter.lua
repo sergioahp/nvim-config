@@ -47,5 +47,34 @@ return {
         vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
+
+    -- Incremental selection. The previous master config had
+    --   init_selection    = "<leader>i"
+    --   node_incremental  = "<leader>i"
+    --   scope_incremental = "<leader>ts"
+    --   node_decremental  = "<leader>I"
+    -- nvim 0.12 ships builtin `an` / `in` keys for parent/child node, but
+    -- those would block mini.ai's `vin(`, `van[`, `vil{`, ... target
+    -- prefixes (mini.ai reads the char after `i` / `a` as a "next" /
+    -- "last" modifier). So we keep the leader-style bindings.
+    -- `bang = true` on vim.cmd.normal makes the inner `v` un-remappable.
+    -- The selection helpers live in vim/treesitter/_select.lua but are
+    -- not exposed on the `vim.treesitter` table; load via require.
+    local ts_select = require "vim.treesitter._select"
+
+    vim.keymap.set("n", "<leader>i", function ()
+      -- Enter visual char mode at cursor, then expand to the smallest
+      -- node containing it. Same effect as master's init_selection.
+      vim.cmd.normal({ "v", bang = true })
+      ts_select.select_parent(1)
+    end, { silent = true, desc = "Start incremental node selection" })
+
+    vim.keymap.set("x", "<leader>i",  function () ts_select.select_parent(vim.v.count1) end, { silent = true, desc = "Expand to parent node" })
+    vim.keymap.set("x", "<leader>I",  function () ts_select.select_child (vim.v.count1) end, { silent = true, desc = "Shrink to child node" })
+    -- scope_incremental on master picked the next named scope from the
+    -- `locals` query; there is no direct equivalent in vim.treesitter._select.
+    -- Aliased to a parent-expand here; redundant with <leader>i but
+    -- preserved so muscle memory still works.
+    vim.keymap.set("x", "<leader>ts", function () ts_select.select_parent(vim.v.count1) end, { silent = true, desc = "Expand to parent node (was scope_incremental)" })
   end,
 }

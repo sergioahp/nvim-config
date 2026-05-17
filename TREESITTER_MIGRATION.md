@@ -28,10 +28,13 @@ Legend:
 - [ ] foldexpr via `v:lua.vim.treesitter.foldexpr()` (builtin, untouched)
 - [x] `vim.treesitter.language.register("markdown", "octo")` (kept in
   nvim-treesitter.lua)
-- [N/A] `incremental_selection` module -- replaced by builtin keymaps `[n`,
-  `]n`, `an`, `in` (visual/operator pending mode). Custom mappings
-  `<leader>i` / `<leader>I` / `<leader>ts` are lost; re-bind if wanted by
-  calling `vim.treesitter._select.select_parent/child/next/prev`.
+- [x] incremental selection -- the master `incremental_selection` module
+  is gone; rewired the same `<leader>i` / `<leader>I` / `<leader>ts`
+  keymaps to call `require('vim.treesitter._select').select_parent/child`.
+  Builtin `[n`,`]n`,`an`,`in` are deliberately NOT used: mini.ai's
+  `vin(`, `van[`, ... target prefixes would be eaten by an `in`/`an` op
+  pending mapping. `<leader>ts` (master's `scope_incremental`) now just
+  aliases parent-expand since there is no direct equivalent.
 - [N/A] `auto_install`, `sync_install`, `additional_vim_regex_highlighting`
   toggle (config knobs no longer exist on main)
 
