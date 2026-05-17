@@ -17,13 +17,17 @@ Legend:
 
 ## Core nvim-treesitter
 
-- [ ] highlight on opened buffers (`vim.treesitter.start` via FileType autocmd)
+- [x] CLAUDE.md (markdown with fenced code blocks) opens without error
+- [x] parser install (`require('nvim-treesitter').install({...})`) -- 22 parsers
+  built into `~/.local/share/nvim/site/parser/` via headless run
+- [x] highlight on opened buffers (`vim.treesitter.start` via FileType autocmd)
 - [ ] indent (`vim.bo.indentexpr = ... 'nvim-treesitter'.indentexpr() ...`)
-- [ ] parser install (`require('nvim-treesitter').install({...})` or `:TSInstall`)
-- [ ] `:TSUpdate` works (requires `tree-sitter` cli on PATH)
+- [ ] `:TSUpdate` works (requires `tree-sitter` cli on PATH; cli added to
+  home-manager, parsers download succeeds; rebuild flow not yet exercised
+  end-to-end)
 - [ ] foldexpr via `v:lua.vim.treesitter.foldexpr()` (builtin, untouched)
-- [ ] `vim.treesitter.language.register("markdown", "octo")` (builtin, untouched)
-- [ ] CLAUDE.md (markdown with fenced code blocks) opens without error
+- [x] `vim.treesitter.language.register("markdown", "octo")` (kept in
+  nvim-treesitter.lua)
 - [N/A] `incremental_selection` module -- replaced by builtin keymaps `[n`,
   `]n`, `an`, `in` (visual/operator pending mode). Custom mappings
   `<leader>i` / `<leader>I` / `<leader>ts` are lost; re-bind if wanted by
