@@ -37,37 +37,42 @@ Legend:
 
 ## nvim-treesitter-textobjects
 
-Select (visual + operator pending):
-- [ ] `ik` / `ak` -> @class.inner / @class.outer
-- [ ] `ig` / `ag` -> @comment.inner / @comment.outer
-- [ ] `if` / `af` -> @call.inner / @call.outer
-- [ ] `im` / `am` -> @function.inner / @function.outer
-- [ ] `iv` / `av` -> @loop.inner / @loop.outer
-- [ ] `ir` / `ar` -> @parameter.inner / @parameter.outer
-- [ ] `ij` / `aj` -> @conditional.inner / @conditional.outer
-- [ ] `iz`       -> @assignment.inner
-- [ ] `iu`       -> @number.inner
+Select (visual + operator pending). Verified that `select_textobject` for
+`@function.outer` from inside a rust function selects the expected line
+range; only `im`/`am` exercised end-to-end, the rest just verified to be
+registered as keymaps.
+- [x] `ik` / `ak` -> @class.inner / @class.outer       (registered)
+- [x] `ig` / `ag` -> @comment.inner / @comment.outer   (registered)
+- [x] `if` / `af` -> @call.inner / @call.outer         (registered)
+- [x] `im` / `am` -> @function.inner / @function.outer (live tested)
+- [x] `iv` / `av` -> @loop.inner / @loop.outer         (registered)
+- [x] `ir` / `ar` -> @parameter.inner / @parameter.outer (registered)
+- [x] `ij` / `aj` -> @conditional.inner / @conditional.outer (registered)
+- [x] `iz`       -> @assignment.inner (registered)
+- [x] `iu`       -> @number.inner     (registered)
 
 Swap (with `<leader>d` next inner, `<leader>D` prev inner,
        `<leader>s` next outer, `<leader>S` prev outer; plus z/u nonpaired):
-- [ ] all paired letters (k g f m v r j)
-- [ ] nonpaired (z, u)
+- [x] all paired letters (k g f m v r j)  (registered, not live tested --
+  swap mutates the buffer; verify in interactive use)
+- [x] nonpaired (z, u)                    (registered)
 
 Move:
-- [ ] `]<letter>` / `[<letter>`  next/prev start (outer textobject)
-- [ ] `]<LETTER>` / `[<LETTER>`  next/prev end (outer textobject)
-- [ ] `]y` / `[y`                next/prev fold (folds query)
+- [x] `]<letter>` / `[<letter>`  next/prev start (outer textobject)
+  (registered; `]m` live tested -> moved 1 -> 62 in main.rs)
+- [x] `]<LETTER>` / `[<LETTER>`  next/prev end (outer textobject) (registered)
+- [x] `]y` / `[y`                next/prev fold (folds query, live tested)
 
 Repeatable move (built into textobjects, must keep working):
-- [ ] `;` repeat last move
-- [ ] `,` repeat last move opposite
-- [ ] `f` / `F` / `t` / `T` repeatable variants
+- [x] `;` repeat last move           (live tested: ]m then ; -> 62 -> 68)
+- [x] `,` repeat last move opposite  (live tested: after ; -> back to 62)
+- [x] `f` / `F` / `t` / `T` repeatable variants (registered)
 
 ## Related
 
-- [ ] `mini.ai` (`lua/plugins/mini-ai.lua`) still resolves treesitter queries
-  via `mini_ai.gen_spec.treesitter({...})` (uses nvim-treesitter-textobjects
-  queries indirectly)
+- [x] `mini.ai` (`lua/plugins/mini-ai.lua`) still resolves treesitter queries
+  via `mini_ai.gen_spec.treesitter({...})` (loaded ok; spec built without
+  error)
 - [ ] avante.nvim still loads (declares `nvim-treesitter` as a dependency
   in `lua/plugins/avante-nvim.lua`)
 
