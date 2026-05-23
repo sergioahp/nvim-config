@@ -52,6 +52,14 @@ return {
         cmp.select_prev_item()
       end
     end
+    --
+    local tab_or_fallback = function (fallback)
+      if cmp.get_selected_entry() ~= nil then
+        cmp.confirm({ select = true })
+      else
+        fallback()
+      end
+    end
     opts.formatting = {
       fields = { 'abbr', 'kind', 'menu' },
       format = lspkind.cmp_format({
@@ -93,10 +101,11 @@ return {
 
       },
       ['<Tab>'] = {
-        c = complete_or_next
+        i = tab_or_fallback,
+        c = complete_or_next,
       },
       ['<S-Tab>'] = {
-        c = complete_or_prev
+        c = complete_or_next,
       },
     }
     opts.sources = cmp.config.sources({
