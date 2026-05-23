@@ -38,6 +38,20 @@ return {
         cmp.complete()
       end
     end
+    local complete_or_next = function()
+      if not cmp.visible() then
+        cmp.complete()
+      else
+        cmp.select_next_item()
+      end
+    end
+    local complete_or_prev = function()
+      if not cmp.visible() then
+        cmp.complete()
+      else
+        cmp.select_prev_item()
+      end
+    end
     opts.formatting = {
       fields = { 'abbr', 'kind', 'menu' },
       format = lspkind.cmp_format({
@@ -71,22 +85,18 @@ return {
         i = cmp.mapping.confirm({ select = true }),
         c = cmp.mapping.confirm({ select = true })
       },
-      ['<C-n>'] = function ()
-        if not cmp.visible() then
-          cmp.complete()
-        end
-        cmp.select_next_item()
-      end,
-      ['<C-p>'] = function ()
-        if not cmp.visible() then
-          cmp.complete()
-        end
-        cmp.select_prev_item()
-      end,
+      ['<C-n>'] = complete_or_next,
+      ['<C-p>'] = complete_or_prev,
       ['<C-c>'] = {
         i = toggle_menu,
         c = toggle_menu,
 
+      },
+      ['<Tab>'] = {
+        c = complete_or_next
+      },
+      ['<S-Tab>'] = {
+        c = complete_or_prev
       },
     }
     opts.sources = cmp.config.sources({
