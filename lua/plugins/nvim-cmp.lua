@@ -105,7 +105,7 @@ return {
         c = complete_or_next,
       },
       ['<S-Tab>'] = {
-        c = complete_or_next,
+        c = complete_or_prev,
       },
     }
     opts.sources = cmp.config.sources({
