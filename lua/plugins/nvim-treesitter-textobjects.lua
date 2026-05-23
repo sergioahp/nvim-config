@@ -43,7 +43,7 @@ local nonpaired = {
 }
 
 return {
-  "nvim-treesitter/nvim-treesitter-textobjects",
+  "sergioahp/nvim-treesitter-textobjects",
   branch = "main",
   lazy = false,
   dependencies = { "nvim-treesitter/nvim-treesitter" },
