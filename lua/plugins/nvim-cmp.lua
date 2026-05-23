@@ -31,6 +31,13 @@ return {
     local cmp = require('cmp')
     local lspkind = require('lspkind')
     opts.preselect = require('cmp').PreselectMode.None -- Do not preselect any item by default
+    local function toggle_menu()
+      if cmp.visible() then
+        cmp.close()
+      else
+        cmp.complete()
+      end
+    end
     opts.formatting = {
       fields = { 'abbr', 'kind', 'menu' },
       format = lspkind.cmp_format({
@@ -55,8 +62,15 @@ return {
         show_labelDetails = true,
       })
     }
+    -- Seems by defaults it overwrites i only
+    -- you can specify more modes like i = cmp.mapping.close()
+    -- but if passing mappings = ... to cmd's preset then you overwrite what you
+    -- set here
     opts.mapping = {
-      ['<C-space>'] = cmp.mapping.confirm({ select = true }),
+      ['<C-space>'] = {
+        i = cmp.mapping.confirm({ select = true }),
+        c = cmp.mapping.confirm({ select = true })
+      },
       ['<C-n>'] = function ()
         if not cmp.visible() then
           cmp.complete()
@@ -69,6 +83,11 @@ return {
         end
         cmp.select_prev_item()
       end,
+      ['<C-c>'] = {
+        i = toggle_menu,
+        c = toggle_menu,
+
+      },
     }
     opts.sources = cmp.config.sources({
       -- { name = 'cmp_ai', keyword_length = 0 },
@@ -93,14 +112,12 @@ return {
     local cmp = require('cmp')
     cmp.setup(opts)
     cmp.setup.cmdline({ '/', '?' }, {
-      mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = 'buffer' }
       }
     })
 
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({
         { name = 'path' },
       }, {
