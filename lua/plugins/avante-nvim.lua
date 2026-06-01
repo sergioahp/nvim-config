@@ -1,11 +1,12 @@
 return {
-  "yetone/avante.nvim",
+  "sergioahp/avante.nvim",
+  -- dir = "/home/admin/code/lua/avante.nvim",
   event = "VeryLazy",
   version = false, -- Never set this value to "*"! Never!
   opts = {
     -- add any opts here
     -- for example
-    provider = "openai",
+    provider = "gpt_oss_120b",
     behaviour = {
       -- auto-approve file ops but require confirmation for shell execution
       auto_approve_tool_permissions = {
@@ -34,6 +35,32 @@ return {
         extra_request_body = {
           reasoning = {
             effort = "high",
+          },
+        },
+      },
+      gpt_oss_120b = {
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "openai/gpt-oss-120b",
+        api_key_name = "OPENROUTER_API_KEY",
+        -- Fast streaming on cerebras/groq: 100ms throttle on the edit-feature
+        -- buffer writes is a comfortable spot for these providers.
+        edit_stream_flush_interval_ms = 900,
+        -- Benchmark mode: no incremental writes; single buffer update at completion.
+        -- Only honored on the `bench/coalesce-vs-wait` branch of avante.nvim;
+        -- `feat/edit-streaming-throttle` (the PR branch) does not define this field.
+        -- edit_stream_disabled = true,
+        -- edit_stream_disabled = false,
+        extra_request_body = {
+          reasoning = {
+            effort = "low",
+          },
+          -- OpenRouter routing: try cerebras first, then groq, no fallback to
+          -- other providers if both are unavailable. See
+          -- https://openrouter.ai/docs/guides/routing/provider-selection
+          provider = {
+            order = { "cerebras", "groq" },
+            allow_fallbacks = false,
           },
         },
       },
