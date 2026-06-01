@@ -53,6 +53,25 @@ return {
     require'luasnip.loaders.from_vscode'.lazy_load()
     local snippets_path = vim.fs.joinpath(vim.fn.stdpath('config'), 'snippets/')
     require'luasnip.loaders.from_lua'.lazy_load({ paths = { snippets_path } })
+
+    vim.api.nvim_set_hl(
+        0,
+        'LuasnipChoiceNode',
+        { bg = '#5d1288' }
+    )
+
+    vim.api.nvim_set_hl(
+        0,
+        'LuasnipInsertNodeActive',
+        { bg = '#107031' }
+    )
+
+    vim.api.nvim_set_hl(
+        0,
+        'LuasnipInsertNodeVisited',
+        { bg = '#145586' }
+    )
+
   end,
   opts = function(_, opts)
     -- # TODO: don't just silently ignore opts(?)
@@ -65,9 +84,18 @@ return {
       ext_opts = {
         [types.choiceNode] = {
           active = {
-            virt_text = { { "<", "Err" } },
+            virt_text = { { "⬅", "Err" } },
+            hl_group = "LuasnipChoiceNode",
           },
         },
+          [types.insertNode] = {
+            active = {
+              hl_group = "LuasnipInsertNodeActive",
+            },
+            visited = {
+              hl_group = "LuasnipInsertNodeVisited",
+            },
+          }
       },
     }
     return m
