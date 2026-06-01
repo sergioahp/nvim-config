@@ -4,6 +4,9 @@ local globalOptions = {
   hlsearch = false,
   title = true,
   timeoutlen = 8000,
+  -- 😔 Preview mode in mini.align needs this when working with lsp
+  -- https://github.com/nvim-mini/mini.nvim/issues/1875
+  showmode = false,
 }
 
 local windowOptions = {
