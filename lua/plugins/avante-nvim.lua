@@ -20,8 +20,11 @@ return {
         if ok and fast.has_pending(ev.buf) then fast.dismiss_all(ev.buf) end
       end,
     })
-    -- Sticky provider toggle: <C-g> (g = GLM) flips between the default
-    -- gpt_oss_120b and glm_4_7 (GLM 4.7 pinned to cerebras, see `providers`).
+    -- Sticky provider toggle: <C-g> flips between the default gpt_oss_120b
+    -- (fast, cerebras) and gpt_5_4_mini (smarter, azure, minimal reasoning --
+    -- see `providers`). Picked over glm_4_7-on-cerebras after benching the
+    -- ipython/flake diagnosis scenario: mini was right 8/8 first-try, GLM and
+    -- gpt-oss kept fabricating package fixes at any reasoning effort.
     -- switch_provider mutates Config.provider, which every request path
     -- (sidebar, zen, floating prompt, fast engine, selection edit) reads at
     -- submit time, so the choice sticks until toggled back. Bound per-buffer on
@@ -33,12 +36,12 @@ return {
       callback = function(ev)
         vim.keymap.set({ "n", "i" }, "<C-g>", function()
           local Config = require("avante.config")
-          local target = Config.provider == "glm_4_7" and "gpt_oss_120b" or "glm_4_7"
+          local target = Config.provider == "gpt_5_4_mini" and "gpt_oss_120b" or "gpt_5_4_mini"
           require("avante.api").switch_provider(target)
           -- switch_provider notifies with once=true (silent on repeat toggles),
           -- so echo the new state ourselves every time
           vim.notify("avante provider: " .. target, vim.log.levels.INFO)
-        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> glm_4_7" })
+        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> gpt_5_4_mini" })
       end,
     })
   end,
@@ -138,8 +141,30 @@ return {
           },
         },
       },
+      gpt_5_4_mini = {
+        -- The <C-g> toggle target (see init above): smarter than the cerebras
+        -- pair, ~6-12s per turn. Azure first (better tok/s per openrouter),
+        -- openai as the only fallback (same price). Even "minimal" still
+        -- reasons ~500 tokens, and it beat effort low on latency with the
+        -- same bench accuracy, so no reason to go higher.
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "openai/gpt-5.4-mini",
+        api_key_name = "OPENROUTER_API_KEY",
+        extra_request_body = {
+          reasoning = {
+            effort = "minimal",
+          },
+          provider = {
+            order = { "azure", "openai" },
+            allow_fallbacks = false,
+          },
+        },
+      },
       glm_4_7 = {
-        -- GLM 4.7 on cerebras, the <C-g> toggle target (see init above).
+        -- GLM 4.7 on cerebras. Was the <C-g> toggle target, demoted after the
+        -- ipython/flake bench (0/2 first-try; effort knob is a no-op on
+        -- cerebras). Kept selectable via <leader>a?.
         -- Pinned to cerebras only: the point is the speed, so no fallbacks.
         __inherited_from = "openai",
         endpoint = "https://openrouter.ai/api/v1",
