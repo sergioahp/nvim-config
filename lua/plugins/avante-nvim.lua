@@ -20,6 +20,27 @@ return {
         if ok and fast.has_pending(ev.buf) then fast.dismiss_all(ev.buf) end
       end,
     })
+    -- Sticky provider toggle: <C-g> (g = GLM) flips between the default
+    -- gpt_oss_120b and glm_4_7 (GLM 4.7 pinned to cerebras, see `providers`).
+    -- switch_provider mutates Config.provider, which every request path
+    -- (sidebar, zen, floating prompt, fast engine, selection edit) reads at
+    -- submit time, so the choice sticks until toggled back. Bound per-buffer on
+    -- the avante filetypes: AvanteInput covers the sidebar + zen input,
+    -- AvantePromptInput the floating prompt, Avante the result window.
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("avante_provider_toggle", { clear = true }),
+      pattern = { "AvanteInput", "AvantePromptInput", "Avante" },
+      callback = function(ev)
+        vim.keymap.set({ "n", "i" }, "<C-g>", function()
+          local Config = require("avante.config")
+          local target = Config.provider == "glm_4_7" and "gpt_oss_120b" or "glm_4_7"
+          require("avante.api").switch_provider(target)
+          -- switch_provider notifies with once=true (silent on repeat toggles),
+          -- so echo the new state ourselves every time
+          vim.notify("avante provider: " .. target, vim.log.levels.INFO)
+        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> glm_4_7" })
+      end,
+    })
   end,
   opts = {
     -- add any opts here
@@ -113,6 +134,24 @@ return {
           -- https://openrouter.ai/docs/guides/routing/provider-selection
           provider = {
             order = { "cerebras", "groq" },
+            allow_fallbacks = false,
+          },
+        },
+      },
+      glm_4_7 = {
+        -- GLM 4.7 on cerebras, the <C-g> toggle target (see init above).
+        -- Pinned to cerebras only: the point is the speed, so no fallbacks.
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "z-ai/glm-4.7",
+        api_key_name = "OPENROUTER_API_KEY",
+        edit_stream_flush_interval_ms = 900,
+        extra_request_body = {
+          reasoning = {
+            effort = "medium",
+          },
+          provider = {
+            order = { "cerebras" },
             allow_fallbacks = false,
           },
         },
