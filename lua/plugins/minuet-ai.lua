@@ -1,7 +1,6 @@
 return {
   "sergioahp/minuet-ai.nvim",
   branch = "main",
-  -- commit = "9b1065a1ef891bcd7dfd1830d53355673c9ed951",
   -- name = "minuet-ai",
   -- dir = "~/code/lua/minuet-ai.nvim",
   enabled = true,
@@ -14,11 +13,15 @@ return {
         api_key = "MISTRAL_API_KEY",
         stream = true,
         optional = {
-          -- Single-line completions (autotrigger + <c-f>): a line tops out
-          -- around ~200 chars, so 64 tokens is plenty. <C-S-f> overrides this
-          -- to 256 for multi-line block completions.
+          -- Autotrigger + <c-f>: 64 tokens of multi-line generation, no stop.
+          -- Only the first line renders (virtualtext.max_display_lines below);
+          -- the rest stays cached, so accepting the line and moving on serves
+          -- the next line without another request. First paint is not slower
+          -- than the old stop = { "\n" } setup: with streaming the first line
+          -- shows as soon as its newline arrives (~575ms vs ~955ms for the
+          -- full 64 tokens, scripts/probe_codestral_first_line_stream.py).
+          -- <C-S-f> overrides this to 256 tokens for block completions.
           max_tokens = 64,
-          stop = { '\n' },
         },
       },
       openai_fim_compatible = {
@@ -90,6 +93,12 @@ return {
       -- a function of prefix length.
       -- Note: trimmed to 3k
       context_after_chars = 3000,
+      -- Render only the first line of a completion as ghost text (a +N marker
+      -- counts the hidden tail), so the content below the cursor is never
+      -- displaced. The full multi-line completion stays cached and is consumed
+      -- line by line: <c-o>/<c-s> accept the visible line, and after Enter the
+      -- next line surfaces from cache. <C-S-f> lifts the cap for its request.
+      max_display_lines = 1,
     },
     throttle = 0,
     debounce = 0,
@@ -118,19 +127,20 @@ return {
     },
     {
       "<c-f>", function ()
-        -- single-line: relies on provider default stop = { "\n" }
+        -- default family: multi-line generation, single-line display
         require("minuet.virtualtext").action.next()
       end,
       silent = true,
       mode = "i",
-      desc = "Cycle next, or fire single-line completion if none yet",
+      desc = "Cycle next, or fire completion if none yet",
     },
     {
       "<C-S-f>", function ()
         local m = require("minuet")
-        require("minuet.virtualtext").action.next(
-          m.with.optional("codestral", { stop = { "\n\n" }, max_tokens = 256 })
-        )
+        local overrides = m.with.optional("codestral", { stop = { "\n\n" }, max_tokens = 256 })
+        -- show the whole block at once (this family renders uncapped)
+        overrides.virtualtext = { max_display_lines = false }
+        require("minuet.virtualtext").action.next(overrides)
       end,
       silent = true,
       mode = "i",
