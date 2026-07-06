@@ -93,11 +93,11 @@ return {
       -- a function of prefix length.
       -- Note: trimmed to 3k
       context_after_chars = 3000,
-      -- Render only the first line of a completion as ghost text (a +N marker
-      -- counts the hidden tail), so the content below the cursor is never
-      -- displaced. The full multi-line completion stays cached and is consumed
-      -- line by line: <c-o>/<c-s> accept the visible line, and after Enter the
-      -- next line surfaces from cache. <C-S-f> lifts the cap for its request.
+      -- Render only the first line of a completion as ghost text, so the
+      -- content below the cursor is never displaced. The full multi-line
+      -- completion stays cached and is consumed line by line: <c-o>/<c-s>
+      -- accept the visible line, and after Enter the next line surfaces from
+      -- cache. <C-S-f> lifts the cap for its request.
       max_display_lines = 1,
     },
     throttle = 0,
