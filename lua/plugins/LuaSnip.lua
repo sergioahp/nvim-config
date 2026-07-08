@@ -60,11 +60,11 @@ return {
         { bg = '#5d1288' }
     )
 
-    vim.api.nvim_set_hl(
-        0,
-        'LuasnipInsertNodeActive',
-        { bg = '#107031' }
-    )
+    -- vim.api.nvim_set_hl(
+    --     0,
+    --     'LuasnipInsertNodeActive',
+    --     { bg = '#107031' }
+    -- )
 
     vim.api.nvim_set_hl(
         0,
