@@ -182,15 +182,20 @@ return {
         },
       },
       morph = {
-        -- Fast Apply model, called directly at api.morphllm.com with
-        -- MORPH_API_KEY (sourced from ~/.secrets in zshrc). avante hardcodes the
-        -- `morph` provider for the edit_file/fast-apply path, so this is the
-        -- knob. "auto" lets Morph route; pin morph-v3-large (accuracy) or
-        -- morph-v3-fast (speed) for a specific model. Needs enable_fastapply.
+        -- Fast Apply model, routed through OpenRouter (which proxies to
+        -- Morph's own infra, ~0.1s extra hop) because the direct
+        -- api.morphllm.com free tier is rate-limited; Morph claims to offer
+        -- pay-as-you-go but only subscriptions are findable on the site
+        -- (asked on their Discord 2026-07-07). avante hardcodes the `morph`
+        -- provider for the edit_file/fast-apply path, so this is the knob.
+        -- Morph's "auto" router model does not exist on OpenRouter; pin
+        -- morph/morph-v3-large (accuracy) or morph/morph-v3-fast (speed).
+        -- Needs enable_fastapply. To go direct again: endpoint
+        -- https://api.morphllm.com/v1, model "auto", MORPH_API_KEY.
         __inherited_from = "openai",
-        endpoint = "https://api.morphllm.com/v1",
-        model = "auto",
-        api_key_name = "MORPH_API_KEY",
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "morph/morph-v3-fast",
+        api_key_name = "OPENROUTER_API_KEY",
       },
       aihubmix = {
         __inherited_from = "openai",
