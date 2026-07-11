@@ -19,6 +19,7 @@ local ts_filetypes = {
   "c", "lua", "vim", "help", "query", "javascript", "typescript",
   "typescriptreact", "html", "typst", "bash", "sh", "zsh", "markdown",
   "requirements", "toml", "yaml", "python", "nix", "yuck", "rust", "sql",
+  "lean",
   -- via vim.treesitter.language.register below
   "octo",
 }
