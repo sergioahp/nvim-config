@@ -215,9 +215,11 @@ return {
     },
   },
   init = function()
-    -- lazy's keys spec normalizes <C-m> to <CR>; set directly here instead.
+    -- lazy's keys spec doesn't let these extended sequences work correctly;
+    -- setting them manually here makes them work on supporting terminals.
     vim.keymap.set('i', '<C-m>', function()
       require('minuet.virtualtext').action.accept_until_char()
     end, { silent = true, desc = 'Accept suggestion until char (f-like)' })
+    vim.keymap.set('n', '<C-i>', '<C-i>', { noremap = true })
   end,
 }
