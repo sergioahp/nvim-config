@@ -20,7 +20,7 @@
   "maximize.nvim": { "branch": "master", "commit": "d688b66344b03ee6e5a32a0a40af85d174490af8" },
   "mini.ai": { "branch": "main", "commit": "deacc8e9cf05df0297e3b14a08c2f8a415045c6f" },
   "mini.align": { "branch": "main", "commit": "c701192658ddac4e3b20956a964c2b03157b5e51" },
-  "minuet-ai.nvim": { "branch": "main", "commit": "2a8d18d16c78f029f53503fcae37a6e9ff3da058" },
+  "minuet-ai.nvim": { "branch": "main", "commit": "0bdaf56c1c91a3b06292f379fa3aaea017a393f4" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-cmp": { "branch": "main", "commit": "a1d504892f2bc56c2e79b65c6faded2fd21f3eca" },
   "nvim-dbee": { "branch": "master", "commit": "dda517694889a5d238d7aa407403984da9f80cc0" },
