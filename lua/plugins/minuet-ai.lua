@@ -127,7 +127,8 @@ return {
     },
     {
       "<c-f>", function ()
-        -- default family: multi-line generation, single-line display
+        -- default family: multi-line generation, single-line display. Pressed
+        -- while a <C-S-f> block is showing it switches back to this family.
         require("minuet.virtualtext").action.next()
       end,
       silent = true,
@@ -138,13 +139,17 @@ return {
       "<C-S-f>", function ()
         local m = require("minuet")
         local overrides = m.with.optional("codestral", { stop = { "\n\n" }, max_tokens = 256 })
-        -- show the whole block at once (this family renders uncapped)
-        overrides.virtualtext = { max_display_lines = false }
+        -- show the whole block at once (this family renders uncapped), and grow
+        -- the line completion that is already on screen instead of replacing it:
+        -- the request continues past it and the reveal starts from cache, so the
+        -- press reads as "show me more" rather than "show me something else".
+        -- Pressed again (block already showing) it cycles to another block.
+        overrides.virtualtext = { max_display_lines = false, extend_visible = true }
         require("minuet.virtualtext").action.next(overrides)
       end,
       silent = true,
       mode = "i",
-      desc = "Cycle next, or fire multi-line completion if none yet",
+      desc = "Reveal more (extend the shown completion into a block), or cycle blocks",
     },
     {
       "<c-e>", function ()
