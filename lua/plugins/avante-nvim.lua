@@ -20,11 +20,10 @@ return {
         if ok and fast.has_pending(ev.buf) then fast.dismiss_all(ev.buf) end
       end,
     })
-    -- Sticky provider toggle: <C-g> flips between the default gpt_oss_120b
-    -- (fast, cerebras) and gpt_5_4_mini (smarter, azure, minimal reasoning --
-    -- see `providers`). Picked over glm_4_7-on-cerebras after benching the
-    -- ipython/flake diagnosis scenario: mini was right 8/8 first-try, GLM and
-    -- gpt-oss kept fabricating package fixes at any reasoning effort.
+    -- Sticky provider toggle: <C-e> flips between the default gpt_oss_120b
+    -- (fast, cerebras) and gpt_5_6_luna (smarter, Bedrock, minimal reasoning --
+    -- see `providers`). Luna replaces the old mini target, which was picked
+    -- over glm_4_7-on-cerebras after the ipython/flake diagnosis benchmark.
     -- switch_provider mutates Config.provider, which every request path
     -- (sidebar, zen, floating prompt, fast engine, selection edit) reads at
     -- submit time, so the choice sticks until toggled back. Bound per-buffer on
@@ -34,14 +33,14 @@ return {
       group = vim.api.nvim_create_augroup("avante_provider_toggle", { clear = true }),
       pattern = { "AvanteInput", "AvantePromptInput", "Avante" },
       callback = function(ev)
-        vim.keymap.set({ "n", "i" }, "<C-g>", function()
+        vim.keymap.set({ "n", "i" }, "<C-e>", function()
           local Config = require("avante.config")
-          local target = Config.provider == "gpt_5_4_mini" and "gpt_oss_120b" or "gpt_5_4_mini"
+          local target = Config.provider == "gpt_5_6_luna" and "gpt_oss_120b" or "gpt_5_6_luna"
           require("avante.api").switch_provider(target)
           -- switch_provider notifies with once=true (silent on repeat toggles),
           -- so echo the new state ourselves every time
           vim.notify("avante provider: " .. target, vim.log.levels.INFO)
-        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> gpt_5_4_mini" })
+        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> gpt_5_6_luna" })
       end,
     })
   end,
@@ -141,28 +140,26 @@ return {
           },
         },
       },
-      gpt_5_4_mini = {
-        -- The <C-g> toggle target (see init above): smarter than the cerebras
-        -- pair, ~6-12s per turn. Azure first (better tok/s per openrouter),
-        -- openai as the only fallback (same price). Even "minimal" still
-        -- reasons ~500 tokens, and it beat effort low on latency with the
-        -- same bench accuracy, so no reason to go higher.
+      gpt_5_6_luna = {
+        -- The <C-e> toggle target (see init above): smarter than the cerebras
+        -- pair and roughly 100 output tok/s on Amazon Bedrock. Even "minimal"
+        -- still reasons before answering, so keep the low-latency setting.
         __inherited_from = "openai",
         endpoint = "https://openrouter.ai/api/v1",
-        model = "openai/gpt-5.4-mini",
+        model = "openai/gpt-5.6-luna",
         api_key_name = "OPENROUTER_API_KEY",
         extra_request_body = {
           reasoning = {
             effort = "minimal",
           },
           provider = {
-            order = { "azure", "openai" },
+            order = { "amazon-bedrock/us-east-1" },
             allow_fallbacks = false,
           },
         },
       },
       glm_4_7 = {
-        -- GLM 4.7 on cerebras. Was the <C-g> toggle target, demoted after the
+        -- GLM 4.7 on cerebras. Was an earlier toggle target, demoted after the
         -- ipython/flake bench (0/2 first-try; effort knob is a no-op on
         -- cerebras). Kept selectable via <leader>a?.
         -- Pinned to cerebras only: the point is the speed, so no fallbacks.
