@@ -21,9 +21,9 @@ return {
       end,
     })
     -- Sticky provider toggle: <C-e> flips between the default gpt_oss_120b
-    -- (fast, cerebras) and gpt_5_6_luna (smarter, Bedrock, minimal reasoning --
-    -- see `providers`). Luna replaces the old mini target, which was picked
-    -- over glm_4_7-on-cerebras after the ipython/flake diagnosis benchmark.
+    -- (fast, cerebras) and mercury_3 (medium reasoning via OpenRouter -- see
+    -- `providers`). Mercury replaces Luna as the alternate while we try it;
+    -- Luna remains selectable in the provider picker.
     -- switch_provider mutates Config.provider, which every request path
     -- (sidebar, zen, floating prompt, fast engine, selection edit) reads at
     -- submit time, so the choice sticks until toggled back. Bound per-buffer on
@@ -35,12 +35,12 @@ return {
       callback = function(ev)
         vim.keymap.set({ "n", "i" }, "<C-e>", function()
           local Config = require("avante.config")
-          local target = Config.provider == "gpt_5_6_luna" and "gpt_oss_120b" or "gpt_5_6_luna"
+          local target = Config.provider == "mercury_3" and "gpt_oss_120b" or "mercury_3"
           require("avante.api").switch_provider(target)
           -- switch_provider notifies with once=true (silent on repeat toggles),
           -- so echo the new state ourselves every time
           vim.notify("avante provider: " .. target, vim.log.levels.INFO)
-        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> gpt_5_6_luna" })
+        end, { buffer = ev.buf, desc = "avante: toggle gpt_oss_120b <-> mercury_3" })
       end,
     })
   end,
@@ -140,8 +140,26 @@ return {
           },
         },
       },
+      mercury_3 = {
+        __inherited_from = "openai",
+        endpoint = "https://openrouter.ai/api/v1",
+        model = "inception/mercury-3",
+        api_key_name = "OPENROUTER_API_KEY",
+        extra_request_body = {
+          reasoning = {
+            effort = "medium",
+          },
+        },
+        -- The OpenAI adapter strips reasoning for model names outside its GPT
+        -- allowlist. Preserve Mercury's explicit OpenRouter reasoning setting.
+        set_allowed_params = function(provider_conf, request_body)
+          local reasoning = request_body.reasoning
+          require("avante.providers.openai").set_allowed_params(provider_conf, request_body)
+          request_body.reasoning = reasoning
+        end,
+      },
       gpt_5_6_luna = {
-        -- The <C-e> toggle target (see init above): smarter than the cerebras
+        -- Previous <C-e> target, kept selectable: smarter than the cerebras
         -- pair and roughly 100 output tok/s on Amazon Bedrock. Even "minimal"
         -- still reasons before answering, so keep the low-latency setting.
         __inherited_from = "openai",
