@@ -196,6 +196,7 @@ return {
         clangd = {
           cmd = { "clangd", "--background-index", "--clang-tidy" },
         },
+        astro = {},
       }
       opts._user_settings = {
         global_options = global_options,
