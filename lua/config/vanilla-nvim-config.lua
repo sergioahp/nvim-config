@@ -108,3 +108,25 @@ vim.diagnostic.config({
     },
   },
 })
+
+-- require('vim._core.ui2').enable()
+
+-- -- ui2 + nvim-cmp `:` cmdline preview-on-select bug:
+-- -- when cmp.select_next_item runs in `:` cmdline, it calls vim.fn.setcmdline()
+-- -- to preview the selected entry. CmdlineChanged fires and getcmdline() reflects
+-- -- the new content, but the cmdline_show ui event never fires, so ui2's cmd
+-- -- buffer stays out of sync until the entry is confirmed. /? are unaffected.
+-- -- Manually re-emit cmdline_show on CmdlineChanged to keep ui2 in sync.
+-- vim.api.nvim_create_autocmd('CmdlineChanged', {
+--   group = vim.api.nvim_create_augroup('ui2-cmdline-sync', { clear = true }),
+--   callback = function()
+--     local ui2 = require('vim._core.ui2')
+--     if not vim.api.nvim_buf_is_valid(ui2.bufs.cmd) then return end
+--     local cmdline = vim.fn.getcmdline()
+--     require('vim._core.ui2.cmdline').cmdline_show(
+--       { { 0, cmdline, 0 } },
+--       vim.fn.getcmdpos() - 1,
+--       vim.fn.getcmdtype(),
+--       '', 0, 1, 0)
+--   end,
+-- })
