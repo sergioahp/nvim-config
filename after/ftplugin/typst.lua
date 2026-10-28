@@ -22,17 +22,19 @@ vim.api.nvim_set_option_value("formatexpr", "1", { buf = 0 })
 
 -- ftplugin/typst.lua
 --
--- This setup detects a main.typ file and compiles it
-
-local root_files = { 'main.typ' }
-local paths = vim.fs.find(root_files, {
+-- Start typst-languagetool-lsp (grammar/spell checking) for any typst buffer.
+-- Prefer a project main.typ as the compile entry/root when one exists upward;
+-- otherwise fall back to the current file so standalone .typ buffers get checked
+-- too.
+local buf_path = vim.api.nvim_buf_get_name(0)
+local main = vim.fs.find({ 'main.typ' }, {
   upward = true,
   stop = vim.env.HOME,
-  path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
-})
-local root_dir = vim.fs.dirname(paths[1])
+  path = vim.fs.dirname(buf_path),
+})[1] or buf_path
 
-if root_dir then
+if main ~= "" then
+  local root_dir = vim.fs.dirname(main)
   vim.lsp.start({
     cmd = { 'typst-languagetool-lsp' },
     filetype = { 'typst' },
@@ -43,7 +45,7 @@ if root_dir then
       -- host = "http://127.0.0.1",
       -- port = "8081",
       root = root_dir,
-      main = root_dir .. "/main.typ",
+      main = main,
       languages = { de = "de-DE", en = "en-US" }
     },
   })
